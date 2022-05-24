@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Vase
 from django.db.models import Q
+from django.db.models import CharField
 
 # Create your views here.
 def home(request):
@@ -32,12 +33,21 @@ def searchResult(request):
         searchDatabase = request.POST.get("searchDatabase", "")
         valueSet = [vaseRef, collectionName, provenanceName]
         nameSet = {"vaseRef":vaseRef, "collectionName":collectionName,"provenanceName":provenanceName}
-        allVases = Vase.objects.all
+        allVases = Vase.objects.all()
         sortedVases = Vase.objects.filter(vaseRef__icontains=vaseRef, collectionName__icontains=collectionName, provenanceName__icontains=provenanceName)
-        if(not searchDatabase): 
+        if(not searchDatabase):
             if not "" in valueSet:
                 return render(request, 'searchResult.html', {"all":allVases})
             else:
                 return render(request, 'searchResult.html', {"sortedVases":sortedVases,"vaseRef":vaseRef, "collectionName":collectionName, "provName":provenanceName, "nameSet":nameSet})
         else:
-             return render(request, 'searchResult.html', {"all":allVases})
+            fields = [f for f in Vase._meta.fields if isinstance(f, CharField)]
+            queries = [Q(**{f.name: searchDatabase}) for f in fields]
+            qs = Q()
+            for query in queries:
+                qs = qs | query
+            if(not vaseRef):
+                databaseSearch = Vase.objects.filter(qs)
+            else:
+                databaseSearch = Vase.objects.filter(vaseRef, qs)
+            return render(request, 'searchResult.html', {"databaseSearch":databaseSearch, "searchedTerm":searchDatabase})

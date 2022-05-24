@@ -1,4 +1,22 @@
 {% extends 'base.html' %}
+{% block head %}
+<h1 class="intro">Search Results</h1>
+<div class="main">
+    <div class="topnav">
+      <a href="/">Home</a>
+      <a class="active" href="search">Search Page</a>
+      <a  href="contact">Contact</a>
+      <a href="about">About</a>
+      <a href="admin">Login</a>
+      <form method=POST action="{% url 'searchResult' %}" >
+        {% csrf_token %}
+        <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+{% endblock %}
+
+
 {% block content %}
 
 {% if nameSet %}
@@ -13,13 +31,18 @@
 <br>
 
 {% if sortedVases %}
-    {% for item in sortedVases%}
+    {% for item in sortedVases %}
     <p>{{ item }}  </p>
     <br>
     {% endfor %}
 {% endif %}
 
-
-
+{% if databaseSearch %}
+    <strong>What we found for "{{searchedTerm}}"</strong>
+    {% for item in databaseSearch %}
+    <p>{{ item }}  </p>
+    <br>
+    {% endfor %}
+{% endif %}
 
 {% endblock %}

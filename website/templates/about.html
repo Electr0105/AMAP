@@ -1,7 +1,24 @@
 {% extends 'base.html'%}
 {% load static %}
+
+{% block head %}
+<h1 class="intro">About Us</h1>
+<div class="main">
+  <div class="topnav">
+    <a href="/">Home</a>
+    <a href="search">Search Page</a>
+    <a  href="contact">Contact</a>
+    <a class="active" href="about">About</a>
+    <a href="admin">Login</a>
+    <form method=POST action="{% url 'searchResult' %}" >
+      {% csrf_token %}
+      <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+{% endblock %}
+
 {% block content %}
-<h1>About Us</h1>
 <div class="aboutInfo">
   <p>The Trendall Research Centre has the following objectives:</p>
   <ul>
