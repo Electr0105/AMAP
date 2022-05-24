@@ -1,5 +1,23 @@
 {% extends 'base.html'%}
 {% load static %}
+{% block head %}
+<h1 class="intro">Trendall Website Homepage</h1>
+<div class="main">
+  <div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="search">Search Page</a>
+    <a  href="contact">Contact</a>
+    <a href="about">About</a>
+    <a href="admin">Login</a>
+    <form method=POST action="{% url 'searchResult' %}" >
+      {% csrf_token %}
+      <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+{% endblock %}
+
+
 {% block content %}
 
 
@@ -8,4 +26,6 @@
 </a> -->
 
 <h2>Website for CSE3PRA</h2>
+<p>We've got an incredible 4 items in our database, each serchable</p>
+<p>Can't really do much more than that tbh</p>
 {% endblock %}
