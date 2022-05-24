@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1> SEARCH: </h1>
-<input type="text" placeholder="Search..">
 
-
-<form method="get" action='/'>
+<form method=POST action="{% url 'searchResult' %}">
+    <input type="text" placeholder="Vase Reference" name="vaseRef">
+    <input type="text" placeholder="Collection Name" name="collectionName">
     <button type="submit">Search</button>
 </form>
 
 
+{% for item in all %}
+  <p>{{ item }}</p>
+{% endfor %}
 {% endblock %}
