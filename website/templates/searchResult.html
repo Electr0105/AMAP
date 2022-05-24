@@ -1,16 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if vaseRef %}
-    <h2>What we found for {{vaseRef}}</h2>
+{% if nameSet %}
+    <strong>What we found for</strong>
+    {% for key, value in nameSet.items %}
+        {% if value%}
+            <strong> <br>{{ key }} ~ {{ value }}, </strong>
+        {% endif %}   
+     {% endfor %}
 {% endif %}
+<br>
+<br>
 
-{% if all %}
-    {% for item in all%}
-    <strong>{{ item }}  </strong>
+{% if sortedVases %}
+    {% for item in sortedVases%}
+    <p>{{ item }}  </p>
     <br>
     {% endfor %}
 {% endif %}
+
+
 
 
 {% endblock %}
