@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if vaseRef %}
+    <h2>What we found for {{vaseRef}}</h2>
+{% endif %}
+
+{% if all %}
+    {% for item in all%}
+    <strong>{{ item }}  </strong>
+    <br>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock %}
