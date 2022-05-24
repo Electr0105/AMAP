@@ -2,9 +2,20 @@
 {% block content %}
 <h1> SEARCH: </h1>
 
-<form method=POST action="{% url 'searchResult' %}">
-    <input type="text" placeholder="Vase Reference" name="vaseRef">
-    <input type="text" placeholder="Collection Name" name="collectionName">
+<form method=POST action="{% url 'searchResult' %}" >
+  {% csrf_token %}
+    <input autocomplete="off" type="text" placeholder="Vase Reference" name="vaseRef">
+    <br>
+    <br>
+    <input autocomplete="off" type="text" placeholder="Collection Name" name="collectionName">
+    <br>
+    <br>
+    <input autocomplete="off" type="text" placeholder="Provenance Name" name="provenanceName">
+    <br>
+    <br>
+    <input autocomplete="off" type="text" placeholder="Search Database" name="fullSearch">
+    <br>
+    <br>
     <button type="submit">Search</button>
 </form>
 

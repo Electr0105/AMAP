@@ -25,6 +25,9 @@ class Vase(models.Model):
         if self.collectionName is not None:
             output += " Collection Name: " + self.collectionName
         else: output +=" N/A"
+        if self.provenanceName is not None:
+            output += " Provenance Name: " + self.provenanceName
+        else: output +=" N/A"
 
         # for x in self._meta.get_fields():
         #      output += str(x)[13:] + " "
