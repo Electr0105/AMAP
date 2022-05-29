@@ -12,6 +12,7 @@
       <a class="active" href="contact">Contact</a>
       <a href="about">About</a>
       <a href="admin">Login</a>
+      <a href="upload">Upload</a>
       <form method=POST action="{% url 'searchResult' %}" >
         {% csrf_token %}
         <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
@@ -21,9 +22,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>Contact Us</h1>
 <div>
-<p>For issues regarding the database itself, inaccuracies or edits, please contact</p>
-<a href="mailto:TrendallDatabase@gmail.com">TrendallDatabase@gmail.com</a>
+
 </div>
 {% endblock %}

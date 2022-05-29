@@ -2,14 +2,19 @@ from django.shortcuts import render
 from .models import Vase
 from django.db.models import Q
 from django.db.models import CharField
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from .customPython.fileUpload import *
+from .customPython.databaseScripts import insertToTable
+from itertools import chain
+from django.http import Http404
 
 # Create your views here.
 def home(request):
-    objects = Vase.objects.all
-    return render(request, 'home.html', {'all':objects})
+    return render(request, 'home.html', {})
 
 def search(request):
-    objects = Vase.objects.all
+    objects = Vase.objects.all()
     return render(request, 'search.html', {'all':objects})
 
 def about(request):
@@ -18,36 +23,58 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html', {})
 
+def upload(request):
+    if request.POST.get("fileName"):
+        if request.method == "POST":
+            fileValue = request.FILES["fileName"].read()
+            # insertToTable(fileValue)
+            return render(request, 'upload.html', {"fileValue":fileValue})
+        else:
+            return render(request, 'upload.html', {})
+    else:
+        noFile = "Empty File"
+        return render(request, 'upload.html', {"noFile":noFile})
+
 def searchResult(request):
-    # if request.method == "POST":
-    #     vaseRef = request.POST.get("vaseRef","")
-    #     collectionName = request.POST.get("collectionName","")
-    #     objects = Vase.objects.filter(vaseRef__icontains=vaseRef, collectionName__icontains=collectionName)
-    #     return render(request, 'searchResult.html', {"all":objects,"vaseRef":vaseRef})
-    # else:
-    #     return render(request, 'search.html')
     if request.method == "POST":
+        vaseId = request.POST.get("vaseId","")
         vaseRef = request.POST.get("vaseRef","")
         collectionName = request.POST.get("collectionName","")
         provenanceName = request.POST.get("provenanceName","")
         searchDatabase = request.POST.get("searchDatabase", "")
-        valueSet = [vaseRef, collectionName, provenanceName]
-        nameSet = {"vaseRef":vaseRef, "collectionName":collectionName,"provenanceName":provenanceName}
+        valueSet = [vaseId, vaseRef, collectionName, provenanceName]
+        nameSet = {"vaseId":vaseId, "vaseRef":vaseRef, "collectionName":collectionName,"provenanceName":provenanceName}
         allVases = Vase.objects.all()
-        sortedVases = Vase.objects.filter(vaseRef__icontains=vaseRef, collectionName__icontains=collectionName, provenanceName__icontains=provenanceName)
+        sortedVases = Vase.objects.filter(vaseRef__icontains=vaseRef,vaseId__icontains=vaseId, collectionName__icontains=collectionName, provenanceName__icontains=provenanceName)
         if(not searchDatabase):
             if not "" in valueSet:
                 return render(request, 'searchResult.html', {"all":allVases})
             else:
-                return render(request, 'searchResult.html', {"sortedVases":sortedVases,"vaseRef":vaseRef, "collectionName":collectionName, "provName":provenanceName, "nameSet":nameSet})
+                return render(request, 'searchResult.html', {"sortedVases":sortedVases,"vaseId":vaseId, "collectionName":collectionName, "provName":provenanceName, "nameSet":nameSet})
         else:
-            fields = [f for f in Vase._meta.fields if isinstance(f, CharField)]
-            queries = [Q(**{f.name: searchDatabase}) for f in fields]
-            qs = Q()
-            for query in queries:
-                qs = qs | query
-            if(not vaseRef):
-                databaseSearch = Vase.objects.filter(qs)
-            else:
-                databaseSearch = Vase.objects.filter(vaseRef, qs)
-            return render(request, 'searchResult.html', {"databaseSearch":databaseSearch, "searchedTerm":searchDatabase})
+
+            vaseIdMatch = Vase.objects.filter(vaseId__iexact=searchDatabase)
+            collectionNameMatch = Vase.objects.filter(collectionName__icontains=searchDatabase)
+            provenanceNamemMatch = Vase.objects.filter(provenanceName__icontains=searchDatabase)
+            vaseSelection = list(chain(vaseIdMatch, collectionNameMatch, provenanceNamemMatch))
+            return render(request, 'searchResult.html', {"databaseSearch":vaseSelection, "searchedTerm":searchDatabase})
+    else:
+        return render(request, 'seach.html',{})
+            # print(queries)
+            # qs = Q()
+            # for query in queries:
+            #     qs = qs | query
+            # if(not vaseId):
+            #     databaseSearch = Vase.objects.filter(qs)
+            # else:
+            #     databaseSearch = Vase.objects.filter(vaseId, qs)
+            # return render(request, 'searchResult.html', {"databaseSearch":databaseSearch, "searchedTerm":searchDatabase})
+
+def result(request, id=None):
+    vaseObject = "No Vase Found"
+    if id is not None:
+        try:
+            vaseObject = Vase.objects.get(vaseId=id)
+        except:
+            raise Http404
+    return render(request, 'result.html', {"vaseObject":vaseObject})

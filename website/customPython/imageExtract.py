@@ -6,8 +6,8 @@ Parameter: url of pdf
 Author: Michael Horina
 """
 
-import os;
-import fitz;
+import os
+import fitz
 
 def recoverpix(doc, x, imgdict):
     """Return pixmap for item with an image mask."""
