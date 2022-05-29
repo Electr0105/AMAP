@@ -21,3 +21,4 @@ pyOpenSSL==19.0.0
 pyparsing==3.0.7
 PyPDF2==1.26.0
 whitenoise
+pymupdf==1.19.6

@@ -1,9 +1,9 @@
 """
 Image_extract
 Extracts all images from a pdf and applies appropriate soft masks to them if needed
-Usage: from image_extract import image_extraction
-Parameter: url of pdf
 Author: Michael Horina
+
+TODO: Change image order to that of page order
 """
 
 import os;
@@ -25,22 +25,45 @@ def recoverpix(doc, x, imgdict):
     except:
         return None
 
-def image_extraction(pdf):
+def image_extraction(pdf, imagedir=None, fpref="page"):
+    """
+    Parameters
+    ----------
+    pdf : str
+        Specify the pdf to be converted to images as full or relative path in string form.
+
+    imgdir : str, default=None
+        Specify the output folder containing the images. Default is a new directory named '<pdfname>-pages'
+
+    fpref : str, default=None
+        Specify the prefix of the image files. Default is 'page'
+
+    Returns
+    -------
+    None
+    """
+
 
     print(fitz.__doc__)
     if not tuple(map(int, fitz.version[0].split("."))) >= (1, 18, 18):
         raise SystemExit("require PyMuPDF v1.18.18+")
 
-    fpref = "img"
+    if fpref is None:
+        fpref = "page"
     doc = fitz.open(pdf)
     print(doc.metadata)
 
-    imagedir = os.path.join(os.path.dirname(pdf), os.path.splitext(os.path.basename(pdf))[0])
-    if not os.path.exists(imagedir):
+    if imagedir is None:
+        imagedir = os.path.join(os.path.dirname(pdf), os.path.splitext(os.path.basename(pdf))[0]) + "pages"
+    else:
+        imagedir = os.path.join(os.path.dirname(pdf), imagedir)
+    if not os.path.exists(imagedir): #Create the output folder if doesn't exist
         os.makedirs(imagedir, exist_ok = True)
     
     lenXREF = doc.xref_length()
     print("XRef length: " + str(lenXREF))
+
+    imgcnt = 0
 
     smasks = set()
 
@@ -71,7 +94,9 @@ def image_extraction(pdf):
             ext = "png"
             imgdata = imgdict["image"]
 
-        imgn1 = fpref + "-%i.%s" % (xref, ext)
+        imgcnt += 1
+
+        imgn1 = fpref + "-%i.%s" % (imgcnt, ext)
         imgname = os.path.join(imagedir, imgn1)
         ofile = open(imgname, "wb")
         ofile.write(imgdata)
