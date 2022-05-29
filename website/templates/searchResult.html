@@ -39,7 +39,7 @@
 {% endif %}
 
 {% if databaseSearch %}
-    <strong>What we found for "{{searchedTerm}}"</strong>
+    <strong>What we found for ~{{searchedTerm}}~</strong>
     {% for item in databaseSearch %}
     <p>{{ item }}  </p>
     <br>

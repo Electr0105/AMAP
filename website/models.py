@@ -24,23 +24,13 @@ class Vase(models.Model):
         if self.vaseId is not None:
             output += "Vase ID: " + str(self.vaseId)
         else: output +="N/A"
-        if self.vaseRef is not None:
-            output += " Vase Ref: " + str(self.vaseRef)
-        else: output +="N/A"
         if self.collectionName is not None:
             output += " Collection Name: " + self.collectionName
         else: output +=" N/A"
         if self.provenanceName is not None:
             output += " Provenance Name: " + self.provenanceName
         else: output +=" N/A"
-
-        # for x in self._meta.get_fields():
-        #      output += str(x)[13:] + " "
-             # test = exec(self.output)
-        # for x in output:
-        #         field_object = self._meta.get_field(x[13:])
-        #         field_value = field_object.value_from_object(self)
-        #         test += field_value
+        
         return output
 
 class Plate(models.Model):
