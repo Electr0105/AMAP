@@ -8,6 +8,7 @@ from .customPython.fileUpload import *
 from .customPython.databaseScripts import insertToTable
 from itertools import chain
 from django.http import Http404
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def home(request):
@@ -78,3 +79,14 @@ def result(request, id=None):
         except:
             raise Http404
     return render(request, 'result.html', {"vaseObject":vaseObject})
+
+def loginp(request):
+    if request.method == "POST":
+        username = request.POST.get['username']
+        password = request.POST.get['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+        # login(request, user)
+            return render(request, 'login.html', {})
+        else:
+            render(request, 'home.html', {})
