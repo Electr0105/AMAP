@@ -10,6 +10,8 @@ directory. This folder can contain both css files and image assets.
 template. Certain changes need to be made to a typical html file for it to be used as a template, although
 it’s pretty straightforward. Essentially, all you need to do is write in the code you want to be repeated (nav bar, footer, etc.)
 and indicate where you want Django to ‘import’ additional code.
+This should be used to reduce redundant code. Anything that is shared throughout the site should
+be put in the template/base file.
 
 “{% block … %} / {% endblock %}” indicates where you want Django to add your custom code to a template. Unique blocks can be used,
 such as block head, block content etc. but it has to be referenced within the original template.
