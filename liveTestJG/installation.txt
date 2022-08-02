@@ -1,6 +1,7 @@
 --Set Up--
 
-First, make sure you have Python3 installed
+First, make sure you have Python3 installed,
+which you can check with...
 'python3 --version'
 
 If you want install the Python packages in a virtual environment, create and activate
