@@ -1,0 +1,21 @@
+--Set Up--
+
+First, make sure you have Python3 installed
+'python3 --version'
+
+If you want install the Python packages in a virtual environment, create and activate
+(Unix)
+'virutalenv unixVenv'
+'source venv/bin/activate'
+
+(Windows)
+'python3 -m venv windowsVenv'
+'windowsEnv\Scripts\activate.bat'
+
+--Installation--
+
+Run 'pip3 install -r requirements3.txt'
+Give it a minute to install everything.
+
+Finally, enter the project at the top level (there should be a 'manage.py' file visible when you show files),
+run 'python3 manage.py runserver' and follow the given url ('http://127.0.0.1:8000/')
