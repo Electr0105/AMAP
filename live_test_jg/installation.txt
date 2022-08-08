@@ -4,10 +4,13 @@ First, make sure you have Python3 installed,
 which you can check with...
 'python3 --version'
 
+If not, download either throw the package manager in your terminal/command line,
+or just download/install from the internet.
+
 If you want install the Python packages in a virtual environment, create and activate
-(Unix)
+(Unix).
 'virutalenv unixVenv'
-'source venv/bin/activate'
+'source unixVenv/bin/activate'
 
 (Windows)
 'python3 -m venv windowsVenv'
@@ -15,7 +18,7 @@ If you want install the Python packages in a virtual environment, create and act
 
 --Installation--
 
-Run 'pip3 install -r requirements3.txt'
+Run 'pip3 install -r requirements.txt'
 Give it a minute to install everything.
 
 Finally, enter the project at the top level (there should be a 'manage.py' file visible when you show files),
