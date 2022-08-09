@@ -1,0 +1,4 @@
+Version 0.01 of the trained model piggybacking off of Spacy
+This is obviously a super basic demo, don't judge the formatting unless you want to put in the time to improve it
+
+*** REQUIRES SPACY 2.3.7 ***

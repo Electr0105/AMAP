@@ -1,23 +1,29 @@
+from json import loads
+import sqlite3
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+# from django.contrib.auth.models import User
 from django.contrib import messages
-import sqlite3
+from Spacy.loadSpacy import spacy_run
 from .models import Vase
-from django.contrib.auth.models import User
+from .forms import OutputForm
+
+
 con = sqlite3.connect('db.sqlite3', check_same_thread=False)
 cur = con.cursor()
 # Create your views here.
 def home(request):
     if request.method == "POST":
-        vaseRef = request.POST.get("vaseRef","")
-        collectionName = request.POST.get("collectionName","")
-        params = (vaseRef, collectionName)
-        cur.execute("INSERT INTO website_vase (vaseRef, collectionName) VALUES (?, ?)", params)
+        vase_ref = request.POST.get("vase_ref","")
+        collection_name = request.POST.get("collection_name","")
+        params = (vase_ref, collection_name)
+        cur.execute("INSERT INTO website_vase (vase_ref, collection_name) VALUES (?, ?)", params)
         con.commit()
     objects = Vase.objects.all()
     return render(request, 'home.html', {'all':objects})
 
 def loginUser(request):
+    """Function printing python version."""
     if request.user.is_authenticated:
         print(request.user)
         logout(request)
@@ -40,17 +46,33 @@ def loginUser(request):
             return render(request, 'login.html', {})
 
 def upload(request):
-    if len(request.FILES) != 0:
-        if request.method == "POST":
-            fileValue = request.FILES["docfile"].read().decode('UTF-8')
-            # f = open("demofile3.txt", "w")
-            # f.write(fileValue)
-            # f.close()
-            return render(request, 'upload.html', {"value":fileValue})
-        else:
-            return render(request, 'upload.html', {})
+    """Renders the upload page"""
+    if request.method == "POST":
+        input_string = request.POST.get('input_string')
+        output_string = spacy_run(input_string)
+        return render(request, 'upload.html', {"output_string":output_string})
     else:
         return render(request, 'upload.html', {})
 
+    # if request.method == "POST":
+    #     if len(request.FILES) == 1:
+    #         file_value = request.FILES["docfile"].read().decode('UTF-8')
+    #         # f = open("demofile3.txt", "w")
+    #         # f.write(file_value)
+    #         # f.close()
+    #         return render(request, 'upload.html', {"value":file_value})
+    #     else:
+    #         output_string_form = OutputForm(request.POST)
+    #         if output_string_form.is_valid():
+    #             text_value = request.GET.get("text_value","Default")
+    #             print(text_value)
+    #             return render(request, 'upload.html', {"text_value":text_value})
+    #         else:
+    #             output_string_form = OutputForm()
+    #         return render(request, 'upload.html', {"output_string_form":output_string_form})
+    # else:
+    #     return render(request, 'upload.html', {})
+
 def about(request):
+    """Renders the about page"""
     return render(request, 'home.html', {})
