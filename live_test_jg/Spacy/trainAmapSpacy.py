@@ -1,8 +1,7 @@
-import spacy
-from spacy.util import minibatch, compounding
 import random
 from pathlib import Path
-
+from spacy.util import minibatch, compounding
+import spacy
 nlp = spacy.load("en_core_web_sm") 
 
 ner=nlp.get_pipe('ner')
