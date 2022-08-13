@@ -1,0 +1,63 @@
+("""*7 Syracuse 36332, from the Fusco necropolis. Ht. 43-5. (i) P L A T E 2 a
+PP, no. 5, pis. 2 A and 3 b; PPSupp, no. 6; LCS, p. 204, no. 31, pi. 80, 2; Suppl. Ill, p. 99,
+no. 54; Sikanie, figs. 283^; LIMC III, p. 662, Dolan 17, pi. 528, 1.
+[a) Ambush of Dolon, [b) maenad seated between maenad and satyr.
+For the subject of the obverse see F. Lissarrague, Rev Arch 1980, fasc. 1, p. 12 and
+Trendall, NAC 12, 1983, p. 92.""",{"entities":[(0,2,"VASEREF"),(3,44,"COLLECTION"),(50,54,"HEIGHT"),(74,168,"PUBLICATION"),(70,73,"PLATE"),]}),
+("""*8 Syracuse 36319, from the Fusco necropolis. Ht 43-5. [b) P L A T E 2 b
+PP, no. 6, pi. 1 b; PPSupp, no. 7; LCS, p. 204, no. 32; Suppl. Ill, p. 99, no. 55; van der
+Meer, BABesch 52-3, 1977-8, fig. 86; Jobst, Die Hohle, fig. 18; Vernant and Vidal-Nacquet,
+Tragedy and Myth in ancient Greece, pi. 4.
+(a) Philoctetes, [b) maenad between two satyrs (the head of the maenad and the upper
+part of the satyr to r. are missing).""",{"entities":[(0,2,"VASEREF"),(3,44,"COLLECTION"),(49,53,"HEIGHT"),(73,297,"PUBLICATION"),(69,72,"PLATE"),(298,420,"DESCRIPTION"),]}),
+("""*9 Agrigento 11431, from Monte Adranone, T. 1. Ht. 33. PLATE 2 c
+Suppl. I, p. 37, no. 33 a, pi. 8, 3: Suppl. Ill, p. 99, no. 57.
+(a) Young satyr with phiale and dish, bending forward in front of seated maenad, with
+thyrsus in r. hand, [b) two draped youths, 1. with thyrsus, r. with stick""",{"entities":[(0,2,"VASEREF"),(3,45,"COLLECTION"),(51,53,"HEIGHT"),(65,128,"PUBLICATION"),(61,64,"PLATE"),(129,288,"DESCRIPTION"),]}),
+("""*14 Copenhagen, N.M. 9183. Ht. 35, diam. 33. PLATE 2a>
+PP, no. 13; PPSupp, no. 12; LCS, p. 205, no. 37; Suppl. Ill, p. 101, no. 63.
+(a) Satyr bending forward in front of seated half-draped women, holding mirror,
+standing draped woman with egg and thyrsus, [b) young satyr with thyrsus, and draped
+woman with fillet""",{"entities":[(0,3,"VASEREF"),(4,25,"COLLECTION"),(31,33,"HEIGHT"),(41,43,"DIAMETER"),(55,131,"PUBLICATION"),(51,54,"PLATE"),(132,314,"DESCRIPTION"),]}),
+("""17 Louvre K 237. Ht. 31, diam. 30.
+PP, no. 14; PPSupp, no. 20; LCS, p. 206, no. 40, pi. 81,6; Suppl. Ill, p. 101, no. 66.
+(a) Standing maenad with thyrsus and phiale, seated maenad with thyrsus, towards
+whom Eros bends forward with phiale and mirror, [b) seated half-draped maenad with
+thyrsus, standing maenad with phiale and bead-wreath in r. hand, thyrsus in 1.""",{"entities":[(0,2,"VASEREF"),(3,15,"COLLECTION"),(21,23,"HEIGHT"),(31,33,"DIAMETER"),(35,121,"PUBLICATION"),(122,364,"DESCRIPTION"),]}),
+("""18 Naples 2097 (inv. 81465). Ht. 37, diam. 38-5.
+PP, no. 7; PPSupp, no. 8; LCS, p. 206, no. 42, pi. 81,5; Suppl. Ill, p. 101, no. 69.
+[a) Standing maenad with thyrsus and tambourine, seated maenad, with thyrsus, beside
+a cista (cf. nos. 16 and 20), silen bending forward, [b) satyr pursuing maenad.""",{"entities":[(0,2,"VASEREF"),(3,27,"COLLECTION"),(33,35,"HEIGHT"),(43,47,"DIAMETER"),(49,133,"PUBLICATION"),(134,298,"DESCRIPTION"),]}),
+("""24 Naples, private coll. (1) 508. Ht. 37-5, diam. 37-5.
+LCS, Suppl. Ill, p. 101, no. 70 a.
+(a) Silen bending forward over raised 1. foot to offer a kantharos to Dionysos who is
+seated and holds a thyrsus in his 1. hand, standing maenad with sash; above, to 1., bust of
+woman, looking at a mirror she holds in her r. hand, [b) young satyr and draped woman, each
+holding bead-chains.""",{"entities":[(0,2,"VASEREF"),(3,32,"COLLECTION"),(38,42,"HEIGHT"),(50,54,"DIAMETER"),(56,90,"PUBLICATION"),(91,381,"DESCRIPTION"),]}),
+("""*27 Paestum, from S. Venera (11 May 1976). Diam. c. 22. PLATE 3e.
+Seated woman, holding phiale in r. hand; part of a young satyr, bending forward behind
+her.""",{"entities":[(0,3,"VASEREF"),(4,41,"COLLECTION"),(52,54,"DIAMETER"),(62,64,"PLATE"),(66,156,"DESCRIPTION"),]}),
+("""This is an example of random text, nothing here of 13 interest, I like 153 different
+            types of yogurt""",{"entities":[]}),
+("""Some more randong tesxt to test itoaisnduajsbnd asomtufd """,{"entities":[]}),
+("""35 Basel, private coll. Diam. 18.
+LCS, Suppl. Ill, p. 102, no. 75.
+Seated w o m a n with outstretched arms; silen seated beside rock; seated Eros with
+outspread wings.""",{"entities":[(0,2,"VASEREF"),(3,22,"COLLECTION"),(30,32,"DIAMETER"),(34,66,"PUBLICATION"),(67,167,"DESCRIPTION"),]}),
+("""42 Madrid 32653 (ex Prado 120). Ht. 41, diam. 39.
+PPSupp, no. 14; LCS, p. 213, no. 70, pi. 84,1; Suppl. Ill, p. 107, no. 117.
+[a) Capering silen, maenad with tambourine, seated woman, draped woman bending
+forward, [b) two draped youths, with stele between them.""",{"entities":[(0,2,"VASEREF"),(3,30,"COLLECTION"),(36,38,"HEIGHT"),(46,48,"DIAMETER"),(50,125,"PUBLICATION"),(126,261,"DESCRIPTION"),]}),
+("""*397a Geneva, Daverio Ragonesi coll. Ht. 20, diam. 31/21. PLATE 242a"
+J. Chamay, Tribune des Arts 76, 11 March 1987, p. 7.
+(a) Half-draped w o m a n seated to r., with head turned to 1., holding a white mirror in her
+r. hand and a red fillet in her 1., (b) nude w o m a n seated to r., with head turned to 1., holding""",{"entities":[(0,5,"VASEREF"),(6,35,"COLLECTION"),(41,43,"HEIGHT"),(51,56,"DIAMETER"),(70,122,"PUBLICATION"),(64,68,"PLATE"),(123,317,"DESCRIPTION"),]}),
+("""*630a Market. Ht. 71 PLATE 241 d
+(a) Phaon, (b) two figures (one female, one male ?) moving to 1.; above, to 1., seated nude
+figure; to r., youth bending forward over slightly raised r. foot.
+Neck: (a) draped woman, holding wreath, and young satyr, (b) draped woman, holding
+eggs (?), and young satyr bending forward.""",{"entities":[(-1,5,"VASEREF"),(6,12,"COLLECTION"),(18,20,"HEIGHT"),(27,32,"PLATE"),(33,317,"DESCRIPTION"),]}),
+("""*383 Paestum 6237, from C. Laghetto (1955), T. 120. Ht. 22-5, diam. 21. PLATE 196c,/
+PAdd, no. A 267.
+[a) Nude youth bending forward in front of stele, [b) seated half-draped woman with
+phiale and fillet—altar to r.""",{"entities":[(0,4,"VASEREF"),(5,50,"COLLECTION"),(56,60,"HEIGHT"),(68,70,"DIAMETER"),(85,101,"PUBLICATION"),(78,84,"PLATE"),(102,215,"DESCRIPTION"),]}),
