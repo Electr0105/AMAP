@@ -177,7 +177,11 @@ def trainAndRun():
 
     sizes = compounding(1.0, 4.0, 1.001)
     # Training for 50 iterations     
+<<<<<<< Updated upstream
     for itn in range(50):
+=======
+    for itn in range(5000):
+>>>>>>> Stashed changes
       # shuffle examples before training
       random.shuffle(TRAIN_DATA)
       # batch up the examples using spaCy's minibatch
@@ -190,7 +194,11 @@ def trainAndRun():
         nlp.update(texts, annotations, sgd=optimizer, drop=0.35, losses=losses)
         # print("Losses", losses)
 
+<<<<<<< Updated upstream
   output_dir = Path('./trainedModels/amapNER')
+=======
+  output_dir = Path('./TrainedModels/small_test_5k')
+>>>>>>> Stashed changes
   nlp.to_disk(output_dir)
   print("Saved model to", output_dir)
 
