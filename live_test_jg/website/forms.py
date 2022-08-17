@@ -9,3 +9,6 @@ class OutputForm(forms.Form):
     # def getString():
     #     for x in out
     #     return output
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()

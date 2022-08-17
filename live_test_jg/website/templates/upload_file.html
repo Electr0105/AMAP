@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form id="upload" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <input id="id_docfile" autocomplete="off" type="file" name="docfile" accept=".doc, .docx, .pdf, .txt">
+        <br>
+        <button name="docfile" autocomplete="off" class="btn btn-dark my-4" type="submit">Upload</button>
+</form>
+<form method="post">
+  {% csrf_token %}
+  <button name="refresh">REFRESH</button>
+</form>
+{% endblock %}
