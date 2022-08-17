@@ -46,30 +46,30 @@ def loginUser(request):
 
 def upload(request):
     """Renders the upload page"""
-    if request.method == "POST":
-        if 'refresh' in request.POST:
-            return render(request, 'upload.html', {})
+    # if request.method == "POST":
+    #     if 'refresh' in request.POST:
+    #         return render(request, 'upload.html', {})
         
-        elif 'input_string' in request.POST:
-            input_string = request.POST.get('input_string')
-            print(input_string)
-            if input_string:
-                output_string = spacy_run(input_string)
-                return render(request, 'upload.html', {"output_string":output_string})
-            else:
-                return render(request, 'upload.html', {})
+    #     elif 'input_string' in request.POST:
+    #         input_string = request.POST.get('input_string')
+    #         print(input_string)
+    #         if input_string:
+    #             output_string = spacy_run(input_string)
+    #             return render(request, 'upload.html', {"output_string":output_string})
+    #         else:
+    #             return render(request, 'upload.html', {})
         
-        elif 'docfile' in request.POST:
-            if request.FILES['docfile'] is not None:
-                file = request.FILES['docfile']
-                return render(request, 'upload.html', {"file_name": file})
-            else:
-                return render(request, 'upload.html', {})
+    #     elif 'docfile' in request.POST:
+    #         if request.FILES['docfile'] is not None:
+    #             file = request.FILES['docfile']
+    #             return render(request, 'upload.html', {"file_name": file})
+    #         else:
+    #             return render(request, 'upload.html', {})
         
-        else:
-            return render(request, 'upload.html', {})
-    else:
-        return render(request, 'upload.html', {})
+    #     else:
+    #         return render(request, 'upload.html', {})
+    # else:
+    return render(request, 'upload.html', {})
     # if request.POST.get("refresh"):
     #     request.FILES['docfile'] = None
 
@@ -116,4 +116,10 @@ def upload_file(request):
 
 def upload_text(request):
     """Renders the upload_file page"""
-    return render(request, 'upload_text.html', {})
+    if request.method == "POST":
+        output_string = request.POST.get("input_string")
+        print(output_string)
+        spacy_string = spacy_run(output_string)
+        return render(request, 'upload_text.html', {"output_string":output_string, "spacy_string":spacy_string})
+    else:
+        return render(request, 'upload_text.html', {})

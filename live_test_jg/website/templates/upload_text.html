@@ -5,11 +5,16 @@
   {% csrf_token %}
   <label for="input_string">Enter Paragraph</label><br>
   <input id="text_upload_box" type="text" name="input_string" id="input_string" placeholder="input_string"><br>
-  <button  name="input_string" autocomplete="off" class="btn btn-dark my-4" type="submit">Upload</button>
+  <button autocomplete="off" class="btn btn-dark my-4" type="submit">Upload</button>
 </form>
 <form method="post">
   {% csrf_token %}
   <button name="refresh">REFRESH</button>
 </form>
 
+{{ output_string }}
+<br>
+{% if spacy_string %}
+	{{ spacy_string }}
+{% endif %}
 {% endblock %}
