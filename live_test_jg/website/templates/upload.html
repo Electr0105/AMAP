@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<button name="doc_file" autocomplete="off" class="btn btn-dark my-4" type="submit"><a href="upload/file">file</a></button>
-<button name="input_string" autocomplete="off" class="btn btn-dark my-4" type="submit"><a href="upload/text">text</a></button>
+<form action="/upload/text">
+    <input class="btn btn-dark my-3" type="submit" value="Text" />
+</form>
+<form action="/upload/file">
+    <input class="btn btn-dark my-3" type="submit" value="File" />
+</form>
 {% endblock %}

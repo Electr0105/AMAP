@@ -25,17 +25,29 @@
                 <a href="/">Home</a>
             </li>
             <li>
-                <a href="/">About</a>
+                <a href="/about">About</a>
             </li>
             <li>
-                <a href="/">Contact</a>
+                <a href="/contact">Contact</a>
             </li>
-            <li>
-                <a href="/"><img src="{% static 'assets/bx_search-alt-2search.png' %}" alt="search_icon"></a>
+            <div class="dropdown">
+            <li >
+                <a href="/search"><img src="{% static 'assets/bx_search-alt-2search.png' %}" alt="search_icon"></a>
+                <div class="dropdown-content">
+                    <a href="/database">Database</a>
+                    <a href="/search">Search</a>
+                </div>
             </li>
-            <li>
-                <a href="/upload">Upload</a>
-            </li>
+            </div>
+            <div class="dropdown">
+                <li>
+                    <a href="/upload">Upload</a>
+                    <div class="dropdown-content">
+                        <a href="/upload/text">Text</a>
+                        <a href="/upload/file">File</a>
+                    </div>
+                </li>
+            </div>
             <li>
                 <a href="/login">Login/out</a>
             </li>

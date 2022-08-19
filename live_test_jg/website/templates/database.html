@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<h1>Database</h1>
+<div class = "dbTable">
+    <h4>All current vases</h4>
+    <ol>
+    {% for vase in all_vases %}
+        <li>{{ vase }}</li>
+    {% endfor %}
+    </ol>
+    </div>
+{% endblock %}

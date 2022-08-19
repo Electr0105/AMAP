@@ -4,7 +4,7 @@ import spacy
 open_file = open("test_values.csv",'r',encoding='utf-8')
 reader = csv.reader(open_file)
 
-OUTPUT_DIR = "amapNER"
+OUTPUT_DIR = "TrainedModels/small_test_10000"
 NLP_LOAD = spacy.load(OUTPUT_DIR)
 
 values = []
@@ -16,5 +16,5 @@ for value in reader:
     label_and_value = ""
     for ent in doc.ents:
         if ent is not None:
-            label_and_value += "{} : {} | ".format(str(ent.label_), str(ent))
+            label_and_value += "{}: {} | ".format(str(ent.label_), str(ent))
     print(label_and_value)

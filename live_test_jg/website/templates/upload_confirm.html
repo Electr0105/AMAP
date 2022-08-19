@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<h1>Confirm Database Entry?</h1>
+{{ input_string }}
+{% if output_dict %}
+    <br>
+    <br>
+	{% for a,b in test_string.items %}
+	<li>{{a}}: <input type="text" value={{b}}></li>
+{% endfor %}
+{% endif %}
+
+<form action="/database">
+    <input class="btn btn-dark my-3" type="submit" value="Yes" />
+</form>
+<form action="/upload/text">
+    <input class="btn btn-dark my-4" type="submit" value="No, try again" />
+</form>
+
+
+{% endblock %}

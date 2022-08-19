@@ -1,4 +1,5 @@
 import sqlite3
+from textwrap import fill
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.models import User
@@ -10,6 +11,14 @@ from .forms import UploadFileForm
 
 con = sqlite3.connect('db.sqlite3', check_same_thread=False)
 cur = con.cursor()
+
+def filler(filled_dict):
+    test = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
+    update = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
+    for key in test:
+        if key in filled_dict:
+            update.update([(key,filled_dict[key])])
+    return update
 # Create your views here.
 def home(request):
     if request.method == "POST":
@@ -19,9 +28,12 @@ def home(request):
         cur.execute("INSERT INTO website_vase (vase_ref, collection_name) VALUES (?, ?)", params)
         con.commit()
     objects = Vase.objects.all()
+    output = []
+    for vase_object in objects:
+        output.append(vase_object.all_values())
     return render(request, 'home.html', {'all':objects})
 
-def loginUser(request):
+def login_user(request):
     """Function printing python version."""
     if request.user.is_authenticated:
         print(request.user)
@@ -36,7 +48,7 @@ def loginUser(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                # Redirect to a success page.
+                # Redirect to home page
                 return redirect('/')
             else:
                 messages.success(request, "Login failed, please try again")
@@ -46,65 +58,11 @@ def loginUser(request):
 
 def upload(request):
     """Renders the upload page"""
-    # if request.method == "POST":
-    #     if 'refresh' in request.POST:
-    #         return render(request, 'upload.html', {})
-        
-    #     elif 'input_string' in request.POST:
-    #         input_string = request.POST.get('input_string')
-    #         print(input_string)
-    #         if input_string:
-    #             output_string = spacy_run(input_string)
-    #             return render(request, 'upload.html', {"output_string":output_string})
-    #         else:
-    #             return render(request, 'upload.html', {})
-        
-    #     elif 'docfile' in request.POST:
-    #         if request.FILES['docfile'] is not None:
-    #             file = request.FILES['docfile']
-    #             return render(request, 'upload.html', {"file_name": file})
-    #         else:
-    #             return render(request, 'upload.html', {})
-        
-    #     else:
-    #         return render(request, 'upload.html', {})
-    # else:
     return render(request, 'upload.html', {})
-    # if request.POST.get("refresh"):
-    #     request.FILES['docfile'] = None
 
-    # elif request.POST.get('input_string') is not None:
-    #     input_string = request.POST.get('input_string')
-    #     if input_string:
-    #         output_string = spacy_run(input_string)
-    #         return render(request, 'upload.html', {"output_string":output_string})
-    # elif request.FILES['docfile']:
-    #     print("TEST32: " + str(request.FILES['docfile']))
-    #     file = request.FILES['docfile']
-    #     file_name = file.name
-    #     print(file_name)
-    #     return render(request, 'upload.html', {"file_name": file})
-    # else:
-    #     return render(request, 'upload.html', {})
-
-    # if request.method == "POST":
-    #     if len(request.FILES) == 1:
-    #         file_value = request.FILES["docfile"].read().decode('UTF-8')
-    #         # f = open("demofile3.txt", "w")
-    #         # f.write(file_value)
-    #         # f.close()
-    #         return render(request, 'upload.html', {"value":file_value})
-    #     else:
-    #         output_string_form = OutputForm(request.POST)
-    #         if output_string_form.is_valid():
-    #             text_value = request.GET.get("text_value","Default")
-    #             print(text_value)
-    #             return render(request, 'upload.html', {"text_value":text_value})
-    #         else:
-    #             output_string_form = OutputForm()
-    #         return render(request, 'upload.html', {"output_string_form":output_string_form})
-    # else:
-    #     return render(request, 'upload.html', {})
+def contact(request):
+    """Renders the contact page"""
+    return render(request, 'contact.html', {})
 
 def about(request):
     """Renders the about page"""
@@ -117,9 +75,33 @@ def upload_file(request):
 def upload_text(request):
     """Renders the upload_file page"""
     if request.method == "POST":
-        output_string = request.POST.get("input_string")
-        print(output_string)
-        spacy_string = spacy_run(output_string)
-        return render(request, 'upload_text.html', {"output_string":output_string, "spacy_string":spacy_string})
+        vase = Vase()
+        all_fields = vase.all_values()
+        input_string = request.POST.get("input_string")
+        spacy_string = spacy_run(input_string)
+        output_dict = dict(zip(spacy_string, all_fields))
+        test_string = filler(spacy_string)
+        return render(request, 'upload_confirm.html', {"test_string":test_string,"input_string":input_string, "spacy_string":spacy_string, "output_dict":output_dict})
     else:
         return render(request, 'upload_text.html', {})
+
+def upload_confirm(request):
+    """Renders the upload_file page"""
+    return render(request, 'upload_confirm.html', {})
+
+def upload_edits(request):
+    """Renders the upload_file page"""
+    return render(request, 'upload_edits.html', {})
+
+def database(request):
+    """Renders the database page"""
+    objects = Vase.objects.all()
+    all_vases = []
+    for vase_object in objects:
+        all_vases.append(vase_object.all_values_culled())
+    return render(request, 'database.html', {"all_vases": all_vases})
+
+def search(request):
+    """Renders the search page"""
+    return render(request, 'search.html', {})
+
