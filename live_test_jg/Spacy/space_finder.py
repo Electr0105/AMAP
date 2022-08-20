@@ -13,17 +13,21 @@ def space_finder(input=None, VASEREF=None,COLLECTION=None,HEIGHT=None,DIAMETER=N
     print(output)
     # open_file.write(output + "\n")
 
-input = """*995 Paestum 5401, from C. Andriuolo (1954), T. 1. Ht. 26. PLATE 156/ PAdd, no. A 290 (where associated with the Painter of Naples 2585).
-Draped woman with phiale, running to r., followed by nude youth with phiale. A large part of the vase between the two figures is missing.
+input = """
+*707 Paestum 5657, from C. Andriuolo (1955), T. 18. Ht. 6-5, diam. 27-5 PLATE 236a
+GRFP, IIID/77, pi. 41 d.
+Bass, perch, bream and torpedo, with a smaller fish, two prawns and a mussel.
+Rim: wave.
 """
 space_finder(input,
-VASEREF="*995",
-COLLECTION="Paestum 5401, from C. Andriuolo (1954), T. 1",
-HEIGHT="26",
-DIAMETER=None,
-PUBLICATION="PAdd, no. A 290 (where associated with the Painter of Naples 2585)",
-PLATE="156/",
-DESCRIPTION="Draped woman with phiale, running to r., followed by nude youth with phiale. A large part of the vase between the two figures is missing.")
+VASEREF="*707",
+COLLECTION="Paestum 5657, from C. Andriuolo (1955), T. 18",
+HEIGHT="6-5",
+DIAMETER="27-5",
+PUBLICATION="GRFP, IIID/77, pi. 41 d.",
+PLATE="236a",
+DESCRIPTION="""Bass, perch, bream and torpedo, with a smaller fish, two prawns and a mussel.
+Rim: wave.""")
 
 # space_finder(input, VASEREF="",
 # COLLECTION="",

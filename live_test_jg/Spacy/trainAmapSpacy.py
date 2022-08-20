@@ -114,7 +114,7 @@ def trainAndRun():
         # Calling update() over the iteration
         nlp.update(texts, annotations, sgd=optimizer, drop=0.35, losses=losses)
 
-  output_dir = Path('./TrainedModels/small_test_10000')
+  output_dir = Path('./TrainedModels/model_10k')
   nlp.to_disk(output_dir)
   print("Saved model to", output_dir)
 
