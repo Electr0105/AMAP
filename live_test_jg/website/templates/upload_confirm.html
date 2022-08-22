@@ -13,11 +13,13 @@
 {% endfor %}
 {% endif %}
 
-<form action="/database">
-    <input class="btn btn-dark my-3" type="submit" value="Yes" />
+<form method="POST" action="/database">
+    {% csrf_token %}
+    <input name='confirm' class="btn btn-dark my-3" type="submit" value="Yes" />
 </form>
-<form action="/upload/text">
-    <input class="btn btn-dark my-4" type="submit" value="No, try again" />
+<form method="POST" action="/upload/text">
+    {% csrf_token %}
+    <input name='cancel' class="btn btn-dark my-4" type="submit" value="No, try again" />
 </form>
 
 

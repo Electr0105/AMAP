@@ -63,7 +63,7 @@ def contact(request):
 
 def about(request):
     """Renders the about page"""
-    return render(request, 'home.html', {})
+    return render(request, 'about.html', {})
 
 def upload_file(request):
     """Renders the upload_file page"""
@@ -72,9 +72,9 @@ def upload_file(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
-        text = text_extractor(myfile)
-        print(text)
-        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url, "text":text})
+        # text = text_extractor(myfile)
+        # print(text)
+        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url})
     else:
         return render(request, 'upload_file.html', {})
 
@@ -93,6 +93,10 @@ def upload_text(request):
 
 def upload_confirm(request):
     """Renders the upload_file page"""
+    if 'confirm' in request.POST:
+        print("CONFIRM")
+    if 'cancel' in request.POST:
+        print("CANCEL")
     return render(request, 'upload_confirm.html', {})
 
 def upload_edits(request):

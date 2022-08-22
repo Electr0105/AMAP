@@ -39,6 +39,15 @@
                 </div>
             </li>
             </div>
+            {% if not user.is_authenticated %}
+            <li>
+                <a href="/login">Login</a>
+            </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li>
+                <a href="/login">Logout</a>
+            </li>
             <div class="dropdown">
                 <li>
                     <a href="/upload">Upload</a>
@@ -48,10 +57,6 @@
                     </div>
                 </li>
             </div>
-            <li>
-                <a href="/login">Login/out</a>
-            </li>
-            {% if user.is_authenticated %}
             <li>
                 <a href="/admin"> <strong>{{ user.username }}</strong></a>
             </li>
@@ -87,10 +92,10 @@
                     <p>+61 3 9479 1827</p>
                 </div>
                 <div class="column" style=" width: 15%;">
-                    <h3>Home</h3>
-                    <h3>About</h3>
-                    <h3>Contact</h3>
-                    <h3>Search</h3>
+                    <a href="/"><h3>Home</h3></a>
+                    <a href="/about"><h3>About</h3></a>
+                    <a href="/contact"><h3>Contact</h3></a>
+                    <a href="/search"><h3>Search</h3></a>
                 </div>
                 <div class="column" style="margin-top: 20px;">
                     <img id="footerImage" src="{% static 'assets/la trobe.png' %}" alt="Latrobe Logo">
