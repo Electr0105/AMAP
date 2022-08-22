@@ -101,8 +101,8 @@ def trainAndRun():
   with nlp.disable_pipes(*other_pipes) :
 
     sizes = compounding(1.0, 4.0, 1.001)
-    # Training for 50 iterations     
-    for itn in range(10000):
+    # Training for 50000 iterations     
+    for itn in range(50000):
       # shuffle examples before training
       random.shuffle(TRAIN_DATA)
       # batch up the examples using spaCy's minibatch
@@ -114,7 +114,7 @@ def trainAndRun():
         # Calling update() over the iteration
         nlp.update(texts, annotations, sgd=optimizer, drop=0.35, losses=losses)
 
-  output_dir = Path('./TrainedModels/model_10k')
+  output_dir = Path('./TrainedModels/model_50k')
   nlp.to_disk(output_dir)
   print("Saved model to", output_dir)
 
