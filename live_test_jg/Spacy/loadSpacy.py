@@ -14,8 +14,8 @@ def spacy_run(value):
 	return store
 
 def filler(filled_dict):
-    test = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
-    update = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
+    test = {"VASEREF":"","COLLECTION":"","HEIGHT":"","DIAMETER":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
+    update = {"VASEREF":"","COLLECTION":"","HEIGHT":"","DIAMETER":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
     for key in test:
         if key in filled_dict:
             update.update([(key,filled_dict[key])])

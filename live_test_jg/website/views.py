@@ -1,6 +1,3 @@
-import re
-import sqlite3
-from textwrap import fill
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.models import User
@@ -12,11 +9,7 @@ from .models import Vase
 from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
 from django.http import Http404
-
-
-con = sqlite3.connect('db.sqlite3', check_same_thread=False)
-cur = con.cursor()
-
+from sql_scripts import insert_to_DB, modify_record
 
 # Create your views here.
 def home(request):
@@ -100,18 +93,8 @@ def upload_text(request):
             for value in request.POST:
                 if value.isupper():
                     vase_values.update({value:request.POST.get(value)})
-            string_start = "INSERT INTO website_vase ("
-            string_end = ""
-            for key, value in vase_values.items():
-                string_start += f"{str(key)}, "
-                string_end += f"\"{str(value)}\", "
-            string_start = string_start[:-2] + ") VALUES ("
-            string_end = string_end[:-2] + ")"
-            command = string_start + string_end
-            print(command)
-            cur.execute(command)
-            con.commit()
-            return render(request, 'upload_text.html', {})
+            insert_to_DB(vase_values)
+            return redirect(database)
         else:
             return render(request, 'upload_text.html', {})
     else:
@@ -137,6 +120,7 @@ def database(request):
     all_vases = []
     for vase_object in objects:
         all_vases.append(vase_object.all_values_culled())
+    print(all_vases)
     return render(request, 'database.html', {"all_vases": all_vases})
 
 def search(request):
@@ -146,11 +130,19 @@ def search(request):
 def vase_page(request, id=None):
     """Renders vase page"""
     if id is not None:
-        try:
-            vase_object = Vase.objects.get(VASEID=id)
-            vase_output = vase_object.all_values_culled()
-            return render(request, 'vase.html', {"vase_object":vase_object, "vase_output":vase_output, "vase_id":id})
-        except:
-            return render(request, 'missing_vase.html', {})
+        if 'save' in request.POST:
+            vase_values = {}
+            for value in request.POST:
+                if value.isupper():
+                    vase_values.update({value:request.POST.get(value)})
+            modify_record(id, vase_values)
+            return redirect(database)
+        else:
+            try:
+                vase_object = Vase.objects.get(VASEID=id)
+                vase_output = vase_object.all_values_culled()
+                return render(request, 'vase.html', {"vase_object":vase_object, "vase_output":vase_output, "vase_id":id})
+            except:
+                return render(request, 'missing_vase.html', {})
     else:
-        return render(request, 'vase.html', {})
+        return render(request, 'database.html', {})

@@ -7,11 +7,11 @@
 {{ input_string }}
 <form method="POST">
     {% csrf_token %}
-    {% if spacy_string %}
+    {% if test_string %}
         <br>
         <br>
-        {% for key, value in spacy_string.items %}
-        <li>{{key}}: <input name={{key}} type="text" value='{{value}}'></input></li>
+        {% for key, value in test_string.items %}
+        <li>{{key}}: <input class="vase_input" name={{key}} type="text" value='{{value}}'></input></li>
 {% endfor %}
 <input name=confirm class="btn btn-dark my-3" type=submit value="Yes" />
 <input name=cancel class="btn btn-dark my-4" type=submit value="No, try again" />

@@ -100,3 +100,10 @@ a, a:hover, a:focus, a:active {
     text-decoration: none;
     color: inherit;
 }
+
+.vase_input{
+    margin-right: 10%;
+    width: 90%;
+    height: 50px;
+    text-overflow: ellipsis;
+}
