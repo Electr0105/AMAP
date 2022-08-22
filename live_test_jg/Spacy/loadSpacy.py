@@ -12,3 +12,11 @@ def spacy_run(value):
 		# "{}: {}".format(str(ent.label_), str(ent))
 		store.update({label:value})
 	return store
+
+def filler(filled_dict):
+    test = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
+    update = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
+    for key in test:
+        if key in filled_dict:
+            update.update([(key,filled_dict[key])])
+    return update

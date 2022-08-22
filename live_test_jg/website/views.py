@@ -4,21 +4,18 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.models import User
 from django.contrib import messages
-from Spacy.loadSpacy import spacy_run
+from django.core.files.storage import FileSystemStorage
+from Spacy.loadSpacy import spacy_run, filler
+from TextExtraction.text_ex import text_extractor
 from .models import Vase
 from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
 
+
 con = sqlite3.connect('db.sqlite3', check_same_thread=False)
 cur = con.cursor()
 
-def filler(filled_dict):
-    test = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
-    update = {"VASEREF":"","COLLECTION":"","HEIGHT":"","PLATE":"","DESCRIPTION":"","PUBLICATION":"","SHAPE":""}
-    for key in test:
-        if key in filled_dict:
-            update.update([(key,filled_dict[key])])
-    return update
+
 # Create your views here.
 def home(request):
     if request.method == "POST":
@@ -70,7 +67,16 @@ def about(request):
 
 def upload_file(request):
     """Renders the upload_file page"""
-    return render(request, 'upload_file.html', {})
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        text = text_extractor(myfile)
+        print(text)
+        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url, "text":text})
+    else:
+        return render(request, 'upload_file.html', {})
 
 def upload_text(request):
     """Renders the upload_file page"""
