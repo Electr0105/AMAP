@@ -2,22 +2,22 @@ from django.db import models
 from django.forms.models import model_to_dict
 # Create your models here.
 class Vase(models.Model):
-    vase_id = models.AutoField(primary_key=True)
-    vase_ref = models.CharField(max_length=16, blank=True, null=True)
-    collection_name = models.CharField(max_length=600,blank=False,null=False)
+    VASEID = models.AutoField(primary_key=True)
+    VASEREF = models.CharField(max_length=16, blank=True, null=True)
+    COLLECTION = models.CharField(max_length=600,blank=False,null=False)
     previous_coll = models.CharField(max_length=600,blank=True, null=True)
-    description = models.CharField(max_length=500,blank=True,null=True)
+    DESCRIPTION = models.CharField(max_length=500,blank=True,null=True)
     provenance_name = models.CharField(max_length=600,blank=True,null=True)
-    height = models.CharField(max_length=50,blank=True,null=True)
-    diameter = models.CharField(max_length=50,blank=True,null=True)
-    publications = models.CharField(max_length=300,blank=True,null=True)
-    plate_id = models.CharField(max_length=100, blank=True,null=True)
+    HEIGHT = models.CharField(max_length=50,blank=True,null=True)
+    DIAMETER = models.CharField(max_length=50,blank=True,null=True)
+    PUBLICATION = models.CharField(max_length=300,blank=True,null=True)
+    PLATE = models.CharField(max_length=100, blank=True,null=True)
     fabric = models.CharField(max_length=50, blank=True,null=True)
     technique = models.CharField(max_length=50,blank=True,null=True)
     shape_name = models.CharField(max_length=50,blank=True,null=True)
     
     def __str__(self):
-        output = "VASEID: " + str(self.vase_id) + " VASEREF: " + str(self.vase_ref) + " COLLECTION NAME: " + self.collection_name
+        output = "VASEID: " + str(self.VASEID) + " VASEREF: " + str(self.VASEREF) + " COLLECTION NAME: " + self.COLLECTION
         return output
 
     def all_fields(self):

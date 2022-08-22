@@ -5,22 +5,18 @@
 
 <h1>Confirm Database Entry?</h1>
 {{ input_string }}
-{% if output_dict %}
-    <br>
-    <br>
-	{% for a,b in test_string.items %}
-	<li>{{a}}: <input type="text" value={{b}}></li>
+<form method="POST">
+    {% csrf_token %}
+    {% if spacy_string %}
+        <br>
+        <br>
+        {% for key, value in spacy_string.items %}
+        <li>{{key}}: <input name={{key}} type="text" value='{{value}}'></input></li>
 {% endfor %}
+<input name=confirm class="btn btn-dark my-3" type=submit value="Yes" />
+<input name=cancel class="btn btn-dark my-4" type=submit value="No, try again" />
+</form>
 {% endif %}
-
-<form method="POST" action="/database">
-    {% csrf_token %}
-    <input name='confirm' class="btn btn-dark my-3" type="submit" value="Yes" />
-</form>
-<form method="POST" action="/upload/text">
-    {% csrf_token %}
-    <input name='cancel' class="btn btn-dark my-4" type="submit" value="No, try again" />
-</form>
 
 
 {% endblock %}
