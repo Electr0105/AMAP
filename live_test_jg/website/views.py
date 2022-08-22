@@ -72,9 +72,15 @@ def upload_file(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
+<<<<<<< Updated upstream
         # text = text_extractor(myfile)
         # print(text)
         return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url})
+=======
+        text = text_extractor(myfile)
+        print(text)
+        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url, "text":text})
+>>>>>>> Stashed changes
     else:
         return render(request, 'upload_file.html', {})
 
