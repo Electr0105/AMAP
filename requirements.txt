@@ -15,3 +15,4 @@ preshed==3.0.6
 requests==2.28.1
 spacy==2.3.7
 sqlparse==0.4.2
+whitenoise==6.2.0
