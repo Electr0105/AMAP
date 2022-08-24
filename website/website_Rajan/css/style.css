@@ -108,3 +108,14 @@ nav
         transform:translateX(0px);
     }
 }
+
+.people
+{
+    display:flex;
+    flex-direction: horizontal;
+}
+
+.people li img
+{
+    width: 450px;
+}
