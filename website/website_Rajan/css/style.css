@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+body
+{
+    overflow-x: hidden;
+}
+
 nav
 {
     display: flex;
@@ -108,14 +113,71 @@ nav
         transform:translateX(0px);
     }
 }
-
+.about_page
+{
+    margin-left: 100px;
+    margin-top: 80px;
+    letter-spacing: 1.5px;
+    font-family: 'Maitree';
+    font-size: 37px;
+    font-weight: 500;
+}
 .people
 {
     display:flex;
+    margin-top: 60px;
+    padding-left:200px;
     flex-direction: horizontal;
+    overflow-x: scroll;
+    
+}
+
+.people li{
+    list-style-type: none;
+    white-space: nowrap;
 }
 
 .people li img
 {
     width: 450px;
+    height: 675px;
+    margin: 30px;
+}
+
+
+.footer{
+    background-color: #D9D9D9;
+    bottom: 0;
+    height: auto;
+    left: 0;
+    /* width: auto; */
+    font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
+    padding-bottom: 20px;
+    padding-left: 70px ;
+}
+.column {
+    margin-top: 10px;
+    float: left;
+    width: 25%;
+    margin-left: 2%;
+    /* padding-right: 2%; */
+  }
+
+  .column img{
+    width: 200px;
+  }
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.footer p{
+    margin: 3px;
+}
+
+.footer h3{
+    margin: 10px;
 }
