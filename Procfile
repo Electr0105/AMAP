@@ -1,1 +1,1 @@
-web: gunicorn dbdisplay.wsgi
+web: gunicorn AMAPWebsite.wsgi
