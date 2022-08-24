@@ -14,14 +14,11 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-STATIC_ROOT = BASE_DIR / "website/static"
-STATIC_URL = 'website/static/'
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/website/static/'
 
 STATICFILES_DIRS = [
-    STATIC_ROOT / "assets",
-    STATIC_ROOT / "css",
-    STATIC_ROOT / "logo",
+    os.path.join(BASE_DIR, "website/static"),
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media/')
