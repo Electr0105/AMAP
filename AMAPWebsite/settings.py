@@ -9,18 +9,17 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import mimetypes
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = 'staticfiles'
-STATIC_URL = 'static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/var/www/static/',
-]
+STATIC_URL = '/static/'
+mimetypes.add_type("text/css", ".css", True)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media/')
 MEDIA_URL = 'Media/'
@@ -34,7 +33,7 @@ MEDIA_URL = 'Media/'
 SECRET_KEY = 'django-insecure-q-07!onflt)hqcycqxv@sv_0+p0kn$os_8!#w4_efz1$fetr0b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'amap-website.herokuapp.com',
