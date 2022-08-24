@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+
+{% if search_results is not None %}
+    <h1>Here's what we found</h1>
+    {% for vase in search_results %}
+    <a href="/vase/{{vase.VASEID}}"><p>{{vase}}</p></a>
+    {% endfor %}
+{% else %}
+    <h1>Looks like we didn't find anything</h1>
+{% endif %}
+
+{% endblock %}

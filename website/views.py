@@ -5,11 +5,13 @@ from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from Spacy.loadSpacy import spacy_run, filler
 from TextExtraction.text_ex import text_extractor
+from search import search_func
 from .models import Vase
 from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
 from django.http import Http404
 from sql_scripts import insert_to_DB, modify_record
+
 
 # Create your views here.
 def home(request):
@@ -120,12 +122,23 @@ def database(request):
     all_vases = []
     for vase_object in objects:
         all_vases.append(vase_object.all_values_culled())
-    print(all_vases)
     return render(request, 'database.html', {"all_vases": all_vases})
 
 def search(request):
     """Renders the search page"""
-    return render(request, 'search.html', {})
+    search_values = {}
+    if request.method =="POST" and 'search' in request.POST:
+        for value in request.POST:
+            if value.isupper() and request.POST.get(value) != "":
+                search_values.update({value:request.POST.get(value)})
+        search_results = search_func(search_values)
+        return render(request, "search_result.html", {"search_results":search_results})
+    else:
+        return render(request, 'search.html', {})
+
+def search_result(request):
+    """Renders the search_result page"""
+    return render(request, 'search_result.html', {"search_results":search_results})
 
 def vase_page(request, id=None):
     """Renders vase page"""

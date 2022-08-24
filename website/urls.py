@@ -9,6 +9,7 @@ urlpatterns = [
     path('contact', views.contact, name="contact"),
     path('database', views.database, name="database"),
     path('search', views.search, name="search"),
+    path('search_result', views.search_result, name="search_result"),
     path('upload/confirm', views.upload_confirm, name="upload_confirm"),
     path('vase/<int:id>', views.vase_page, name="vase_page"),
     path('upload/file', views.upload_file, name="upload_file"),

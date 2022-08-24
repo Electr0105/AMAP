@@ -33,7 +33,7 @@ MEDIA_URL = 'Media/'
 SECRET_KEY = 'django-insecure-q-07!onflt)hqcycqxv@sv_0+p0kn$os_8!#w4_efz1$fetr0b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'amap-website.herokuapp.com',
