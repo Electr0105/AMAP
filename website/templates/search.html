@@ -1,45 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block head %}
-<h1 class="intro">Search Page</h1>
-<div class="main">
-  <div class="topnav">
-    <a href="/">Home</a>
-    <a class="active" href="search">Search Page</a>
-    <a  href="contact">Contact</a>
-    <a href="about">About</a>
-    <a href="admin">Login</a>
-    <a href="upload">Upload</a>
-    <form method=POST action="{% url 'searchResult' %}" >
-      {% csrf_token %}
-      <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
-      <button type="submit">Search</button>
-    </form>
-  </div>
-{% endblock %}
-
-{% block content %}
-<br>
-<form method=POST action="{% url 'searchResult' %}" >
-  {% csrf_token %}
-    <input autocomplete="off" type="text" placeholder="Vase Reference" name="vaseRef">
-    <br>
-    <br>
-    <input autocomplete="off" type="text" placeholder="Collection Name" name="collectionName">
-    <br>
-    <br>
-    <input autocomplete="off" type="text" placeholder="Provenance Name" name="provenanceName">
-    <br>
-    <br>
-    <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
-    <br>
-    <br>
-    <button type="submit">Search</button>
-</form>
-
-
-{% for item in all %}
-  <p>{{ item }}</p>
-{% endfor %}
+{% block body %}
+<h1>Search</h1
 
 {% endblock %}

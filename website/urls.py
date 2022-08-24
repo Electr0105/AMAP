@@ -3,12 +3,15 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('search', views.search, name="search"),
+    path('login', views.login_user, name="login"),
+    path('upload', views.upload, name="upload"),
     path('about', views.about, name="about"),
     path('contact', views.contact, name="contact"),
-    path('searchResult', views.searchResult, name="searchResult"),
-    path('upload', views.upload, name="upload"),
-    path('result', views.result, name="result"),
-    path('result/<int:id>', views.result),
-    path('login', views.login, name="login"),
+    path('database', views.database, name="database"),
+    path('search', views.search, name="search"),
+    path('upload/confirm', views.upload_confirm, name="upload_confirm"),
+    path('vase/<int:id>', views.vase_page, name="vase_page"),
+    path('upload/file', views.upload_file, name="upload_file"),
+    path('upload/text', views.upload_text, name="upload_text"),
+
 ]

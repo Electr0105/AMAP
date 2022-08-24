@@ -1,36 +1,10 @@
-{% extends 'base.html'%}
-{% load static %}
-{% block head %}
-<h1 class="intro">Upload Page</h1>
-<div class="main">
-  <div class="topnav">
-    <a class="active" href="/">Home</a>
-    <a href="search">Search Page</a>
-    <a  href="contact">Contact</a>
-    <a href="about">About</a>
-    <a href="admin">Login</a>
-    <a href="upload">Upload</a>
-    <form method=POST action="{% url 'searchResult' %}" >
-      {% csrf_token %}
-      <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
-      <button type="submit">Search</button>
-    </form>
-  </div>
-{% endblock %}
+{% extends 'base.html' %}
 
-
-{% block content %}
-
-<h2>Test upload page</h2>
-{% if noFile %}
-  <strong> {{noFile}} </strong>
-{% endif %}
-
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-      <input autocomplete="off" type="file" name="fileName" accept=".doc, .docx, .pdf, .txt">
-      <br>
-      <button autocomplete="off" class="btn btn-dark my-4" type="submit">Submit</button>
+{% block body %}
+<form action="/upload/text">
+    <input class="btn btn-dark my-3" type="submit" value="Text" />
 </form>
-
+<form action="/upload/file">
+    <input class="btn btn-dark my-3" type="submit" value="File" />
+</form>
 {% endblock %}

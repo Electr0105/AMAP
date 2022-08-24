@@ -1,40 +1,7 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block head %}
-<h1 class="intro">About Us</h1>
-<div class="main">
-  <div class="topnav">
-    <a href="/home">Home</a>
-    <a href="search">Search Page</a>
-    <a  href="contact">Contact</a>
-    <a class="active" href="about">About</a>
-    <a href="admin">Login</a>
-    <a href="upload">Upload</a>
-    <form method=POST action="{% url 'searchResult' %}" >
-      {% csrf_token %}
-      <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
-      <button type="submit">Search</button>
-    </form>
-  </div>
-{% endblock %}
+{% block body %}
+<h1>About</h1>
 
-{% block content %}
-<div class="aboutInfo">
-  <p>The Trendall Research Centre has the following objectives:</p>
-  <ul>
-    <li>To promote research in the general area of Ancient Mediterranean studies, particularly in the archaeology of South Italy and Sicily during the Classical period.</li>
-    <br>
-    <li>To disseminate within the general community in Australia the results of the latest research in Greek and Roman art and archaeology through the sponsorship of conferences, lectures and seminars.</li>
-    <br>
-    <li>To make available, at the Director's discretion, the resources of the Centre to all scholars and graduate students, whether from Australia or overseas, who wish to use the library and archive.</li>
-    <br>
-    <li>To maintain and extend both the Library and the Archive (as unique research resources in Australia) through the acquisition of books and periodicals relating to Greek and Roman culture, and images of South Italian red-figure vases.</li>
-  </ul>
-</div>
-<br>
-<br>
-<br>
-<p>This website was developed for CSE3PRA by Jackson Gleeson</p>
-<p>Any issues? Too bad. This is a demo</p>
-{% endblock %}
+{% endblock %}  

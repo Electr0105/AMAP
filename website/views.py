@@ -1,92 +1,148 @@
-from django.shortcuts import render
-from .models import Vase
-from django.db.models import Q
-from django.db.models import CharField
-from django.conf import settings
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+# from django.contrib.auth.models import User
+from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
-from .customPython.fileUpload import *
-from .customPython.databaseScripts import insertToTable
-from itertools import chain
+from Spacy.loadSpacy import spacy_run, filler
+from TextExtraction.text_ex import text_extractor
+from .models import Vase
+from django.core.files.uploadedfile import UploadedFile
+from .forms import UploadFileForm
 from django.http import Http404
-from django.contrib.auth import authenticate, login
+from sql_scripts import insert_to_DB, modify_record
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html', {})
-
-def search(request):
     objects = Vase.objects.all()
-    return render(request, 'search.html', {'all':objects})
+    all_vases = []
+    for vase_object in objects:
+        all_vases.append(vase_object.all_values())
+    return render(request, 'home.html', {'all_vases':all_vases})
 
-def about(request):
-    return render(request, 'about.html', {})
-
-def contact(request):
-    return render(request, 'contact.html', {})
+def login_user(request):
+    """Function printing python version."""
+    if request.user.is_authenticated:
+        print(request.user)
+        logout(request)
+        messages.success(request, "You've been logged out")
+        return redirect('/login')
+    else:
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                # Redirect to home page
+                return redirect('/')
+            else:
+                messages.success(request, "Login failed, please try again")
+                return redirect('/login')
+        else:
+            return render(request, 'login.html', {})
 
 def upload(request):
-    if request.POST.get("fileName"):
-        if request.method == "POST":
-            fileValue = request.FILES["fileName"].read()
-            # insertToTable(fileValue)
-            return render(request, 'upload.html', {"fileValue":fileValue})
-        else:
-            return render(request, 'upload.html', {})
-    else:
-        noFile = "Empty File"
-        return render(request, 'upload.html', {"noFile":noFile})
+    """Renders the upload page"""
+    return render(request, 'upload.html', {})
 
-def searchResult(request):
+def contact(request):
+    """Renders the contact page"""
+    return render(request, 'contact.html', {})
+
+def about(request):
+    """Renders the about page"""
+    return render(request, 'about.html', {})
+
+def upload_file(request):
+    """Renders the upload_file page"""
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        # text = text_extractor(myfile)
+        # print(text)
+        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url})
+        text = text_extractor(myfile)
+        print(text)
+        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url, "text":text})
+
+        text = text_extractor(myfile)
+        print(text)
+        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url, "text":text})
+
+    else:
+        return render(request, 'upload_file.html', {})
+
+def upload_text(request):
+    """Renders the upload_file page"""
+    if request.method == "GET":
+        return render(request, "upload_text.html",{})
     if request.method == "POST":
-        vaseId = request.POST.get("vaseId","")
-        vaseRef = request.POST.get("vaseRef","")
-        collectionName = request.POST.get("collectionName","")
-        provenanceName = request.POST.get("provenanceName","")
-        searchDatabase = request.POST.get("searchDatabase", "")
-        valueSet = [vaseId, vaseRef, collectionName, provenanceName]
-        nameSet = {"vaseId":vaseId, "vaseRef":vaseRef, "collectionName":collectionName,"provenanceName":provenanceName}
-        allVases = Vase.objects.all()
-        sortedVases = Vase.objects.filter(vaseRef__icontains=vaseRef,vaseId__icontains=vaseId, collectionName__icontains=collectionName, provenanceName__icontains=provenanceName)
-        if(not searchDatabase):
-            if not "" in valueSet:
-                return render(request, 'searchResult.html', {"all":allVases})
-            else:
-                return render(request, 'searchResult.html', {"sortedVases":sortedVases,"vaseId":vaseId, "collectionName":collectionName, "provName":provenanceName, "nameSet":nameSet})
+        if request.POST.get("input_string") is not None:
+            vase = Vase()
+            all_fields = vase.all_values()
+            input_string = request.POST.get("input_string")
+            spacy_string = spacy_run(input_string)
+            output_dict = dict(zip(spacy_string, all_fields))
+            test_string = filler(spacy_string)
+            return render(request, "upload_confirm.html", {"test_string":test_string,"input_string":input_string, "spacy_string":spacy_string, "output_dict":output_dict})
+        elif 'confirm' in request.POST:
+            vase_values = {}
+            for value in request.POST:
+                if value.isupper():
+                    vase_values.update({value:request.POST.get(value)})
+            insert_to_DB(vase_values)
+            return redirect(database)
         else:
-
-            vaseIdMatch = Vase.objects.filter(vaseId__iexact=searchDatabase)
-            collectionNameMatch = Vase.objects.filter(collectionName__icontains=searchDatabase)
-            provenanceNamemMatch = Vase.objects.filter(provenanceName__icontains=searchDatabase)
-            vaseSelection = list(chain(vaseIdMatch, collectionNameMatch, provenanceNamemMatch))
-            return render(request, 'searchResult.html', {"databaseSearch":vaseSelection, "searchedTerm":searchDatabase})
+            return render(request, 'upload_text.html', {})
     else:
-        return render(request, 'seach.html',{})
-            # print(queries)
-            # qs = Q()
-            # for query in queries:
-            #     qs = qs | query
-            # if(not vaseId):
-            #     databaseSearch = Vase.objects.filter(qs)
-            # else:
-            #     databaseSearch = Vase.objects.filter(vaseId, qs)
-            # return render(request, 'searchResult.html', {"databaseSearch":databaseSearch, "searchedTerm":searchDatabase})
+        return render(request, 'upload_text.html', {})
 
-def result(request, id=None):
-    vaseObject = "No Vase Found"
+def upload_confirm(request):
+    """Renders the upload_file page"""
+    print("ASDDSDSDADADASD")
+    if request.method == "POST":
+        if 'confirm' in request.POST:
+            print("CONFIRM")
+        elif 'cancel' in request.POST:
+            print("CANCEL")
+    return render(request, 'upload_confirm.html', {})
+
+def upload_edits(request):
+    """Renders the upload_file page"""
+    return render(request, 'upload_edits.html', {})
+
+def database(request):
+    """Renders the database page"""
+    objects = Vase.objects.all()
+    all_vases = []
+    for vase_object in objects:
+        all_vases.append(vase_object.all_values_culled())
+    print(all_vases)
+    return render(request, 'database.html', {"all_vases": all_vases})
+
+def search(request):
+    """Renders the search page"""
+    return render(request, 'search.html', {})
+
+def vase_page(request, id=None):
+    """Renders vase page"""
     if id is not None:
-        try:
-            vaseObject = Vase.objects.get(vaseId=id)
-        except:
-            raise Http404
-    return render(request, 'result.html', {"vaseObject":vaseObject})
-
-def loginp(request):
-    if request.method == "POST":
-        username = request.POST.get['username']
-        password = request.POST.get['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-        # login(request, user)
-            return render(request, 'login.html', {})
+        if 'save' in request.POST:
+            vase_values = {}
+            for value in request.POST:
+                if value.isupper():
+                    vase_values.update({value:request.POST.get(value)})
+            modify_record(id, vase_values)
+            return redirect(database)
         else:
-            render(request, 'home.html', {})
+            try:
+                vase_object = Vase.objects.get(VASEID=id)
+                vase_output = vase_object.all_values_culled()
+                return render(request, 'vase.html', {"vase_object":vase_object, "vase_output":vase_output, "vase_id":id})
+            except:
+                return render(request, 'missing_vase.html', {})
+    else:
+        return render(request, 'database.html', {})

@@ -1,47 +1,36 @@
-#This file instantiates models(tables) and their attributes and initialises object-relational database
 from django.db import models
-# from django.db.models.fields.related import ManyToManyField
-
-#define vase class
+from django.forms.models import model_to_dict
+# Create your models here.
 class Vase(models.Model):
-    vaseId = models.AutoField(primary_key=True)
-    vaseRef = models.CharField(max_length=16, blank=True, null=True)
-    collectionName = models.CharField(max_length=600,blank=False,null=False)
-    previousColl = models.CharField(max_length=600,blank=True, null=True)
-    description = models.CharField(max_length=500,blank=True,null=True)
-    provenanceName = models.CharField(max_length=600,blank=True,null=True)
-    height = models.CharField(max_length=50,blank=True,null=True)
-    diameter = models.CharField(max_length=50,blank=True,null=True)
-    publications = models.CharField(max_length=300,blank=True,null=True)
-    plateId = models.CharField(max_length=100, blank=True,null=True)
-    fabric = models.CharField(max_length=50, blank=True,null=True)
-    technique = models.CharField(max_length=50,blank=True,null=True)
-    shapeName = models.CharField(max_length=50,blank=True,null=True)
+    VASEID = models.AutoField(primary_key=True)
+    VASEREF = models.CharField(max_length=16, blank=True, null=True)
+    COLLECTION = models.CharField(max_length=600,blank=False,null=False)
+    PREVIOUSCOL = models.CharField(max_length=600,blank=True, null=True)
+    DESCRIPTION = models.CharField(max_length=500,blank=True,null=True)
+    provenance_name = models.CharField(max_length=600,blank=True,null=True)
+    HEIGHT = models.CharField(max_length=50,blank=True,null=True)
+    DIAMETER = models.CharField(max_length=50,blank=True,null=True)
+    PUBLICATION = models.CharField(max_length=300,blank=True,null=True)
+    PLATE = models.CharField(max_length=100, blank=True,null=True)
+    FABRIC = models.CharField(max_length=50, blank=True,null=True)
+    TECHNIQUE = models.CharField(max_length=50,blank=True,null=True)
+    SHAPE = models.CharField(max_length=50,blank=True,null=True)
     
-
     def __str__(self):
-        output = ""
-        if self.vaseId is not None:
-            output += "Vase ID: " + str(self.vaseId)
-        else: output +="N/A"
-        if self.collectionName is not None:
-            output += " Collection Name: " + self.collectionName
-        else: output +=" N/A"
-        if self.provenanceName is not None:
-            output += " Provenance Name: " + self.provenanceName
-        else: output +=" N/A"
-        
+        output = "VASEID: " + str(self.VASEID) + " VASEREF: " + str(self.VASEREF) + " COLLECTION NAME: " + self.COLLECTION
         return output
 
-class Plate(models.Model):
-    plateId = models.CharField(max_length=100, primary_key=True)
-    imageRef = models.CharField(max_length=500, blank=True,null=True)
+    def all_fields(self):
+        fields = []
+        for field in Vase._meta.get_fields():
+            fields.append(str(field).replace("website.Vase.", ""))
+        return fields
 
-    def __str__(self):
-        output = ""
-        if self.plateId is not None:
-            output += "Plate ID: " + str(self.plateId)
-        else: output +="N/A"
-        if self.imageRef is not None:
-            output += "Image Ref: " + self.imageRef
-        else: output +=" N/A"
+    def all_values(self):
+        output = model_to_dict(self)
+        return output
+
+    def all_values_culled(self):
+        output = model_to_dict(self)
+        culled_dict = {key:val for key, val in output.items() if val is not None}
+        return culled_dict
