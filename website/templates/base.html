@@ -45,9 +45,6 @@
             </li>
             {% endif %}
             {% if user.is_authenticated %}
-            <li>
-                <a href="/login">Logout</a>
-            </li>
             <div class="dropdown">
                 <li>
                     <a href="/upload">Upload</a>
@@ -58,7 +55,15 @@
                 </li>
             </div>
             <li>
-                <a href="/admin"> <strong>{{ user.username }}</strong></a>
+                <div class="dropdown">
+                    <li>
+                    <a href="/admin"><strong>{{ user.username }}</strong></a>
+                    <div class="dropdown-content">
+                        <a href="/admin">Admin</a>
+                        <a href="/login">Logout</a>
+                    </div>
+                    </li>
+                </div>
             </li>
             {% endif %}
         </ul>
