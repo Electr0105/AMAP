@@ -1,38 +1,37 @@
 """
 Author: Michael Horina
 This is the module that handles text functions: tesseract calls for OCR, 
-preprocessing images if needed and cropping tesseract results down into
-text blocks and matching document images.
-TODO: getfontsize
-TODO: preprocess
-
+cropping tesseract results down into text blocks and matching document images.
 """
 
 import os
 import cv2
 import pytesseract
 from pytesseract import Output
+from imagehandler import preprocess
 
-def runtesseract(image: str, type: str = "text") -> str:
+def runtesseract(image: list, type: str = "text") -> str:
     """
     Runs tesseract on the specified image and return text
 
     Parameters
-    image: str
-        the specified image to open and run OCR on
+    image : list
+        the specified image run OCR on
+    type : str
+        default = "text"
+        "text" returns contents while "data" returns OCR data
     Returns
     text: str
         a string containing all the text found by tesseract
     """
 
-    img = cv2.imread(image)
     if type == "text":
-        text = str(pytesseract.image_to_string(img, config='--psm 1 --oem 1', lang="eng+ell"))
+        text = str(pytesseract.image_to_string(image, config='--psm 1 --oem 1', lang="eng+ell"))
     if type == "data":
-        text = str(pytesseract.image_to_data(img, config='--psm 1 --oem 1', lang="eng+ell"))
+        text = str(pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="eng+ell"))
     return text
 
-def getocrdata(image:str) -> dict:
+def getocrdata(image:list) -> dict:
     """
     Runs tesseract on the specified image
 
@@ -44,7 +43,7 @@ def getocrdata(image:str) -> dict:
         a string containing all the text found by tesseract
     """
 
-    img = cv2.imread(image)
+    img = preprocess(image)
     data = pytesseract.image_to_data(img, config='--psm 1 --oem 1', lang="eng+ell", output_type=Output.DICT)
     return data
 
@@ -96,17 +95,3 @@ def generateblocks(data: Output.DICT) -> int:
             continue
             countblocks = countblocks + 1
     return countblocks
-
-
-
-
-def preprocess(image: str) -> str:
-    """
-    Tweak this method as required until you get accurate text extraction
-
-    Parameters
-    image : str
-    """
-
-
-    return image

@@ -175,7 +175,7 @@ def recoverpix(doc, imgdict):
     except:
         return None
 
-def extractpages(pdf: str, saveto: str = None):
+def extractpages(pdf: str, saveto: str = None, overwrite : bool = False):
     """
     Parameters
 
@@ -184,6 +184,8 @@ def extractpages(pdf: str, saveto: str = None):
     saveto : str
         Specify the directory to save page images to.
         default = file location as <filename>-pages/
+    overwrite : bool
+        If set to true will re-process pages, otherwise if page file exists will skip.
 
     Returns
     pages : int
@@ -209,6 +211,9 @@ def extractpages(pdf: str, saveto: str = None):
     print("Number of pages: " + str(page_count))
 
     for pageno in range(page_count):
+        if overwrite == False:
+            if os.path.exists(os.path.join(saveto, "page" + str(pageno) + ".png")):
+                continue
         page = doc.load_page(pageno)
         image = page.get_pixmap(dpi=300, alpha=False)
         imgdata = image.tobytes("png")
