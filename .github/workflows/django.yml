@@ -1,15 +1,15 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 jobs:
   heroku_git_deploy_job:
       runs-on: ubuntu-latest
       name: Git Deploy job- A job to deploy django app to heroku using git
       steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@main
         - name: Deploy django to heroku
           uses: nyakaz73/heroku-django-deploy@v0.68 
           with: 
@@ -17,4 +17,4 @@ jobs:
             heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
             heroku_email_address: 'jackson.gleeson@gmail.com'
             use_git: true
-            git_branch: "main"
+            git_branch: main
