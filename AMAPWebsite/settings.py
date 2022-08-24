@@ -15,8 +15,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_ROOT = BASE_DIR / "static"
-STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "website/static"
+STATIC_URL = 'website/static/'
 
 STATICFILES_DIRS = [
     STATIC_ROOT / "assets",
