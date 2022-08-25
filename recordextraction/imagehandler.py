@@ -17,7 +17,7 @@ def preprocess(image : list) -> list:
     erodekernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
 
     img = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-    retval, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU) #thresholding to eliminate light blemishes
+    retval, img = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
     img = cv2.pyrUp(img, dstsize=(2 * cols, 2 * rows)) #scaled up
     for i in range(5):
         img = cv2.medianBlur(img, 3)

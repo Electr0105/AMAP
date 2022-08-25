@@ -52,9 +52,27 @@ def getfontsize(line : list, bestfit : bool = False) -> int:
 
         blob = numpy.array(blob, dtype=numpy.int32)
         newbox = cv2.minAreaRect(blob)
-        pix = newbox[1][0]/2 #divided by 2 because the preprocessing upscales images 2x.
+        if newbox[2] > 45:
+            pix = newbox[1][0]/2
+        else:
+            pix = newbox[1][1]/2 #divided by 2 because the preprocessing upscales images 2x.
         return pix
     else:
         pix = len(line)/2 #divided by 2 because the preprocessing upscales images 2x.
     return pix
 
+def characterizelines(lines : list) -> str:
+    """
+    This function takes a line image and calculates the approximate font height in pixels
+
+    Parameters
+    line : str
+        The line to be calculated as a path
+    bestfit : bool
+        Whether to find the height of best fit for a line (for when lines may be skewed)
+        note this increases processing time drastically
+
+    Returns
+    pix : int
+        The height value as an integer in pixels.
+    """
