@@ -2,7 +2,7 @@ import spacy
 
 def spacy_run(value):
 	"""Basic run function for spacy, load the saved model and predict"""
-	output_dir = "Spacy/TrainedModels/model_50k"
+	output_dir = "Spacy/TrainedModels/model_10k"
 	nlp_load = spacy.load(output_dir)
 	doc = nlp_load(value)
 	store = {}
