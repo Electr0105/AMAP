@@ -38,8 +38,8 @@ nav
     text-decoration: none;
     letter-spacing: 1.5px;
     font-family: 'Maitree';
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 21px;
+    font-weight: 500;
 }
 
 .burger
@@ -143,6 +143,7 @@ nav
     width: 450px;
     height: 675px;
     margin: 30px;
+    cursor: pointer;
 }
 
 
@@ -152,12 +153,32 @@ nav
     height: auto;
     left: 0;
     /* width: auto; */
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Maitree', sans-serif;
     font-size: 20px;
     padding-bottom: 20px;
     padding-left: 70px ;
 }
-.column {
+
+.footer_home
+{
+  background-color: #D9D9D9;
+  bottom: 0;
+  height: auto;
+  left: 0;
+  /* width: auto; */
+  font-family: 'Maitree', sans-serif;
+  font-size: 20px;
+  padding-bottom: 20px;
+  padding-left: 70px ;
+  margin-top: 80px;
+}
+
+.cards
+{
+  margin-top: 60px;
+}
+  
+  .column {
     margin-top: 10px;
     float: left;
     width: 25%;
@@ -167,12 +188,12 @@ nav
 
   .column h3
   {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Maitree', sans-serif;
   }
 
   .column p
   {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Maitree', sans-serif;
   }
 
   .column img{
@@ -193,21 +214,34 @@ nav
     margin: 10px;
 }
 
+.footer_home p{
+  margin: 3px;
+}
+
+.footer_home h3{
+  margin: 10px;
+}
+
+/*Slideshow CSS begins*/
+
 .slideshow-container {
     width:100%;
     position: relative;
     margin: auto;
-    height: 60%;
+    height: 650px;
   }
   
 
   .mySlides {
     display: none;
+    height: 650px;
   }
   
   .mySlides img
   {
-    height: 50%;
+    position: absolute;
+    height: 650px;
+    object-fit: cover;
   }
 
   .prev, .next {
@@ -289,3 +323,96 @@ nav
     from {opacity: .4} 
     to {opacity: 1}
   }
+
+/*Slideshow CSS ends*/
+
+.content h2
+{
+  letter-spacing: 1.5px;
+  font-family: 'Maitree';
+  font-style: normal;
+  font-size: 40px;
+  font-weight: 600;
+  margin-left: 83px;
+  margin-top: 40px;
+}
+
+.title {
+ 
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+.card-block {
+  font-size: 1em;
+  position: relative;
+  margin: 0;
+  padding: 1em;
+  border: none;
+  border-top: 1px solid rgba(34, 36, 38, .1);
+  box-shadow: none;
+   
+}
+.row
+{
+  display: flex;
+  flex-direction:row;
+}
+
+.container
+{
+  margin-top: 40px;
+}
+.card {
+  font-size: 1em;
+  overflow: hidden;
+  padding: 5;
+  border: none;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  margin-top:20px;
+  margin-left: 150px;
+  margin-right: 150px;
+
+}
+
+.col-md-5 img
+{
+  width: 300px;
+  height: 355px;
+  object-fit: cover;
+}
+
+.col-md-5
+{
+  height: 355px;
+}
+
+.card-title
+{
+  font-family: 'Maitree';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 44.5503px;
+  line-height: 74px;
+  /* identical to box height */
+  margin-left: 48.79px;
+  margin-top: 45.61px;
+
+
+  color: #000000;
+}
+
+.card-text
+{
+  font-family: 'Maitree';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height:25px;
+  margin-left: 48.79px;
+  margin-top: 10px;
+}
+
+.btn {
+margin-top: auto;
+}
