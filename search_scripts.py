@@ -35,4 +35,7 @@ def general_search(search_value):
     Q(VASEID__icontains=search_value) |
     Q(VASEREF__icontains=search_value))
 
+    if len(search_results) == 0:
+        search_results = None
+
     return(search_results)

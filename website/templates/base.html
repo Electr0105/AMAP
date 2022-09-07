@@ -34,7 +34,7 @@
             <li>
                 <form method="POST" action="{% url 'search_result' %}">
                     {% csrf_token %}
-                    <input name="search" type="text" autocomplete="off">
+                    <input name="search" type="text" autocomplete="off" placeholder="General Search">
                     <button type="submit"><img src="{% static 'assets/bx_search-alt-2search.png' %}" alt="search_icon"></button>
                 </form>
                 <div class="dropdown-content">
