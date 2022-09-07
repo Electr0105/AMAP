@@ -5,7 +5,8 @@ from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from Spacy.loadSpacy import spacy_run, filler
 from TextExtraction.text_ex import text_extractor
-from search import search_func
+from search_scripts import search_func
+from search_scripts import general_search
 from .models import Vase
 from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
@@ -15,11 +16,7 @@ from sql_scripts import insert_to_DB, modify_record
 
 # Create your views here.
 def home(request):
-    objects = Vase.objects.all()
-    all_vases = []
-    for vase_object in objects:
-        all_vases.append(vase_object.all_values())
-    return render(request, 'home.html', {'all_vases':all_vases})
+    return render(request, 'home.html', {})
 
 def login_user(request):
     """Function printing python version."""
@@ -124,7 +121,7 @@ def database(request):
         all_vases.append(vase_object.all_values_culled())
     return render(request, 'database.html', {"all_vases": all_vases})
 
-def search(request):
+def advanced_search(request):
     """Renders the search page"""
     search_values = {}
     if request.method =="POST" and 'search' in request.POST:
@@ -134,11 +131,16 @@ def search(request):
         search_results = search_func(search_values)
         return render(request, "search_result.html", {"search_results":search_results})
     else:
-        return render(request, 'search.html', {})
+        return render(request, 'advanced_search.html', {})
 
 def search_result(request):
     """Renders the search_result page"""
-    return render(request, 'search_result.html', {"search_results":search_results})
+    if request.method =="POST":
+        search_value = request.POST.get("search")
+        search_results = general_search(search_value)
+        return render(request, 'search_result.html', {"search_results":search_results})
+    else:
+        return render(request, 'search_result.html', {})
 
 def vase_page(request, id=None):
     """Renders vase page"""

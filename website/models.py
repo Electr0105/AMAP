@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms.models import model_to_dict
+
 # Create your models here.
 class Vase(models.Model):
     VASEID = models.AutoField(primary_key=True)
@@ -7,7 +8,7 @@ class Vase(models.Model):
     COLLECTION = models.CharField(max_length=600,blank=False,null=False)
     PREVIOUSCOL = models.CharField(max_length=600,blank=True, null=True)
     DESCRIPTION = models.CharField(max_length=500,blank=True,null=True)
-    provenance_name = models.CharField(max_length=600,blank=True,null=True)
+    PROVENANCE_NAME = models.CharField(max_length=600,blank=True,null=True)
     HEIGHT = models.CharField(max_length=50,blank=True,null=True)
     DIAMETER = models.CharField(max_length=50,blank=True,null=True)
     PUBLICATION = models.CharField(max_length=300,blank=True,null=True)

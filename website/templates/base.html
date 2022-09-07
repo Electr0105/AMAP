@@ -31,11 +31,15 @@
                 <a href="/contact">Contact</a>
             </li>
             <div class="dropdown">
-            <li >
-                <a href="/search"><img src="{% static 'assets/bx_search-alt-2search.png' %}" alt="search_icon"></a>
+            <li>
+                <form method="POST" action="{% url 'search_result' %}">
+                    {% csrf_token %}
+                    <input name="search" type="text" autocomplete="off">
+                    <button type="submit"><img src="{% static 'assets/bx_search-alt-2search.png' %}" alt="search_icon"></button>
+                </form>
                 <div class="dropdown-content">
                     <a href="/database">Database</a>
-                    <a href="/search">Search</a>
+                    <a href="/advanced_search">Advanced Search</a>
                 </div>
             </li>
             </div>
@@ -98,7 +102,7 @@
                     <a href="/"><h3>Home</h3></a>
                     <a href="/about"><h3>About</h3></a>
                     <a href="/contact"><h3>Contact</h3></a>
-                    <a href="/search"><h3>Search</h3></a>
+                    <a href="/advanced_search"><h3>Search</h3></a>
                 </div>
                 <div class="column" style="margin-top: 20px;">
                     <img id="footerImage" src="{% static 'assets/la trobe.png' %}" alt="Latrobe Logo">
