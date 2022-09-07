@@ -43,31 +43,110 @@
     </a>
     <section class="content">
 
-    <h2>Advanced Search Form</h2>
-
-    <span class="search_main">
-        <div class="filters">
-            <div class="search-container">
-                <form action="">
-                  <input type="text" placeholder="Search.." name="search">
-                  <button type="submit"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
-                </form>
-            </div>
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                <div id="myDropdown" class="dropdown-content">
-                  <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                </div>
-              </div>
-            <div class="filter"></div>
-            <div class="filter"></div>
-            <div class="filter"></div>
-            <div class="filter"></div>
-            <div class="filter"></div>
-            <div class="filter"></div>
-            <div class="filter"></div>
+        <div>
+            <h2>Advanced Search Form</h2>
         </div>
-    </span>
+        <div class="search-main">
+            <ul class="filterlist">
+                <li>
+                    <div class="filters">
+                        <div class="search-container">
+                            <div class="title_2">
+                                <h3>General Search</h3>
+                            </div>
+                            <form action="">
+                                <input type="text" placeholder="Search.." name="search">
+                                <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                            </form>
+                        </div>
+                </li>
+                <li>
+                    <div class="filters">
+                        <div class="search-container">
+                            <div class="title_2">
+                                <h3>Vase Reference</h3>
+                            </div>
+                            <form action="">
+                                <input type="text" placeholder="Search Vase Reference" name="VASEREF">
+                                <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                            </form>
+                        </div>
+                </li>
+                <li><div class="filters">
+                    <div class="search-container">
+                        <div class="title_2">
+                            <h3>Collection</h3>
+                        </div>
+                        <form action="">
+                            <input type="text" placeholder="Search Collection" name="COLLECTION">
+                            <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                        </form>
+                    </div></li>
+                <li><div class="filters">
+                    <div class="search-container">
+                        <div class="title_2">
+                            <h3>Height</h3>
+                        </div>
+                        <form action="">
+                            <input type="text" placeholder="Search Height" name="HEIGHT">
+                            <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                        </form>
+                    </div></li>
+                <li><div class="filters">
+                    <div class="search-container">
+                        <div class="title_2">
+                            <h3>Diameter</h3>
+                        </div>
+                        <form action="">
+                            <input type="text" placeholder="Search Diameter" name="DIAMETER">
+                            <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                        </form>
+                    </div></li>
+                <li><div class="filters">
+                    <div class="search-container">
+                        <div class="title_2">
+                            <h3>Publication</h3>
+                        </div>
+                        <form action="">
+                            <input type="text" placeholder="Search Publication" name="PUBLICATION">
+                            <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                        </form>
+                    </div></li>
+                <li><div class="filters">
+                    <div class="search-container">
+                        <div class="title_2">
+                            <h3>Shape</h3>
+                        </div>
+                        <form action="">
+                            <input type="text" placeholder="Search Shape" name="SHAPE">
+                            <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                        </form>
+                    </div></li>
+                <li><div class="filters">
+                    <div class="search-container">
+                        <div class="title_2">
+                            <h3>Plate</h3>
+                        </div>
+                        <form action="">
+                            <input type="text" placeholder="Search Plate" name="PLATE">
+                            <button type="submit" value="search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                        </form>
+                    </div></li>
+                <li><div class="filters">
+                    <div class="search-container">
+                        <div class="title_2">
+                            <h3>Description</h3>
+                        </div>
+                        <form action="">
+                            <input type="text" placeholder="Search Description" name="DESCRIPTION">
+                            <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                        </form>
+                    </div></li>
+            </ul>
+        </div>
+
+        </div>
+
 
     </section>
     <div class="footer_home">
@@ -75,10 +154,10 @@
             <div class="column">
                 <h3>Address</h3>
                 <p>A.D. Trendall Research Centre<br>
-                Menzies College<br>
-                La Trobe University<br>
-                Victoria 3086<br>
-                AUSTRALIA</p>
+                    Menzies College<br>
+                    La Trobe University<br>
+                    Victoria 3086<br>
+                    AUSTRALIA</p>
             </div>
             <div class="column">
                 <h3>Phone</h3>
@@ -148,31 +227,8 @@
             dots[slideIndex - 1].className += " active";
 
         }
-
-
-        /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-function filterFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
-  a = div.getElementsByTagName("a");
-  for (i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
-    }
-  }
-}
     </script>
-    
+
 
 </body>
 

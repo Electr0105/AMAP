@@ -417,29 +417,54 @@ nav
 margin-top: auto;
 }
 
+.search-main
+{
+  display: flex;
+  flex-direction: vertical;
+}
 
-.filters .search-container {
-  float: left;
+.filterlist
+{
+  margin-top: 25px;
+
+
+}
+
+.filterlist li
+{
+  list-style-type: none;
+}
+
+
+.filterlist li .search-container {
+  display:inline-block;
   background-color:rgba(242, 242, 242, 1);
   margin-top: 15px;
   margin-left: 83px;
 }
 
-.filters input[type=text] {
+.filterlist li input[type=text] {
   padding: 6px;
-  margin: 8px;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-bottom: 8px;
+  height: 40px;
   font-size: 17px;
   border: none;
 }
 
-.filters input[type=text].active
+.filterlist li input[type=text].active
 {
   border: none;
 }
 
-.filters .search-container button {
+.filterlist li .search-container button {
   float: right;
-  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  height: 40px;
+  width: 40px;
   background: rgba(211, 211, 211, 1);
   align-items: center;
   vertical-align: middle;
@@ -448,62 +473,17 @@ margin-top: auto;
   cursor: pointer;
 }
 
-/* Dropdown Button */
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
+.title_2 h3
+{
+  margin-left: 9px;
+  margin-top: 5px;
+}
+
+.title_2 h3
+{
+  font-family: 'Maitree';
+  font-style: normal;
+  font-weight: 500;
   font-size: 16px;
-  border: none;
-  cursor: pointer;
+  line-height:25px;
 }
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #3e8e41;
-}
-
-/* The search field */
-#myInput {
-  box-sizing: border-box;
-  background-image: url('searchicon.png');
-  background-position: 14px 12px;
-  background-repeat: no-repeat;
-  font-size: 16px;
-  padding: 14px 20px 12px 45px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-}
-
-/* The search field when it gets focus/clicked on */
-#myInput:focus {outline: 3px solid #ddd;}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  border: 1px solid #ddd;
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
