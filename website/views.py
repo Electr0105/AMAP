@@ -29,7 +29,7 @@ def login_user(request):
         if request.method == "POST":
             username = request.POST.get('username')
             password = request.POST.get('password')
-            
+
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -135,7 +135,7 @@ def advanced_search(request):
 
 def search_result(request):
     """Renders the search_result page"""
-    if request.method =="POST":
+    if request.method == "POST":
         search_value = request.POST.get("search")
         search_results = general_search(search_value)
         return render(request, 'search_result.html', {"search_results":search_results})
