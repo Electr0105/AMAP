@@ -4,7 +4,7 @@ First, make sure you have Python3 installed,
 which you can check with...
 'python3 --version'
 
-If not, download either throw the package manager in your terminal/command line,
+If not, download either through the package manager in your terminal/command line,
 or just download/install from the internet.
 
 If you want install the Python packages in a virtual environment, create and activate
