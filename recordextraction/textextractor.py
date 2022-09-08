@@ -11,28 +11,7 @@ from pytesseract import Output
 from imagehandler import preprocess
 from pdfhandler import *
 
-def runtesseract(image: list, type: str = "text") -> str:
-    """
-    Runs tesseract on the specified image and return text
-
-    Parameters
-    image : list
-        the specified image run OCR on
-    type : str
-        default = "text"
-        "text" returns contents while "data" returns OCR data
-    Returns
-    text: str
-        a string containing all the text found by tesseract
-    """
-
-    if type == "text":
-        text = str(pytesseract.image_to_string(image, config='--psm 1 --oem 1', lang="eng+ell"))
-    if type == "data":
-        text = str(pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="eng+ell"))
-    return text
-
-def getocrdata(image:list) -> dict:
+def getocrdata(image : list) -> dict:
     """
     Runs tesseract on the specified image
 
@@ -44,11 +23,11 @@ def getocrdata(image:list) -> dict:
         a string containing all the text found by tesseract
     """
 
-    img = preprocess(image)
-    data = pytesseract.image_to_data(img, config='--psm 1 --oem 1', lang="eng+ell", output_type=Output.DICT)
+    image = preprocess(image)
+    data = pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="eng+ell", output_type=Output.DICT)      
     return data
 
-def generatelines(page : str, overwrite : bool = False) -> int:
+def generateimages(page : str, data : str, overwrite : bool = False) -> int:
     """
     Creates an image of each line of text from a source image
 
@@ -57,6 +36,7 @@ def generatelines(page : str, overwrite : bool = False) -> int:
         Specifies the current page lines are being split from for saving
         in a subdirectory
     overwrite : bool
+        default = False
         If set to true will re-process lines, otherwise if line file exists will skip.
 
     Returns
@@ -64,24 +44,36 @@ def generatelines(page : str, overwrite : bool = False) -> int:
         The number of lines extracted from an image
     """
 
-    folder = os.path.dirname(page)
-    filename = os.path.basename(page)
-    filefolder = os.path.join(folder, os.path.splitext(filename)[0])
+    pagefolder = os.path.dirname(page)
+    pagename = os.path.basename(page)
+    filefolder = os.path.join(pagefolder, os.path.splitext(pagename)[0])
     image = cv2.imread(page)
+    image = preprocess(image)
 
     if not os.path.exists(filefolder): #Create the output folder if doesn't exist
         os.makedirs(filefolder, exist_ok = True)
-    data = pytesseract.image_to_data(page, config='--psm 1 --oem 1', lang="eng+ell", output_type=Output.DICT)
     
     countlines = 0
+    countwords = 0
     for i in range(len(data['level'])):
-        if data['level'][i] != 4:
+        if data['level'][i] == 4:
+            countlines += 1
+            if overwrite == False:
+                if os.path.exists(os.path.join(filefolder, "line" + str(countlines) + ".png")):
+                    continue    
+            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+            cv2.imwrite(os.path.join(filefolder, "line" + str(countlines) + ".png"), image[y:y+h, x:x+w])
+            countwords = 0 # When a line is extracted the word count is reset for the word extraction that follows
+        if data['level'][i] == 5:
+            countwords += 1
+            if overwrite == False:
+                if os.path.exists(os.path.join(filefolder, "line" + str(countlines), "word" + str(countwords) + ".png")):
+                    continue
+            linefolder = os.path.join(filefolder, "line" + str(countlines))
+            if not os.path.exists(linefolder):
+                os.makedirs(linefolder, exist_ok = True)
+            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+            cv2.imwrite(os.path.join(linefolder, "word" + str(countwords) + ".png"), image[y:y+h, x:x+w])
+        else:
             continue
-        countlines = countlines + 1
-        if overwrite == False:
-            if os.path.exists(os.path.join(filefolder, "line" + str(countlines) + ".png")):
-                continue
-        (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
-        cv2.imwrite(os.path.join(filefolder, "line" + str(countlines) + ".png"), image[y:y+h, x:x+w])
-
-    return countlines
+    return countlines, countwords
