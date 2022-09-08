@@ -2,6 +2,135 @@
 {% load static %}
 
 {% block body %}
-<h1>The Trendall Database</h1>
-<img id=mainPot src="{% static 'assets/basicPot.png' %}" alt="pot">
+<section class="content">
+    <div class="slideshow-container">
+
+
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 5</div>
+            <img src="assets/1.png" style="width:100%">
+            <div class="text">1</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 5</div>
+            <img src="assets/2.png" style="width:100%">
+            <div class="text">2</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 5</div>
+            <img src="assets/3.png" style="width:100%">
+            <div class="text">3</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">4 / 5</div>
+            <img src="assets/4.png" style="width:100%">
+            <div class="text">4</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">5 / 5</div>
+            <img src="assets/5.png" style="width:100%">
+            <div class="text">5</div>
+        </div>
+
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+    <br>
+
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <h2>Popular Articles</h2>
+
+        <section class="cards">
+            <div class="container py-3">
+                <!-- Card Start -->
+                <div class="card">
+                    <div class="row ">
+
+                        <div class="col-md-7 px-3">
+                            <div class="card-block px-6">
+                                <h4 class="card-title">Owl of Athena coin</h4>
+                                <p class="card-text">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae laboriosam repudiandae dolore nulla iste unde doloremque quod sed voluptate repellendus nemo fugiat aliquid blanditiis, deserunt architecto excepturi a quis voluptatem quos officiis, hic qui in! Placeat consectetur saepe eius sequi excepturi aperiam? Aspernatur, accusantium hic quis ipsam qui minus at! Voluptas impedit possimus optio facilis accusantium cumque asperiores ipsam soluta deleniti. Distinctio molestias, vero ullam nesciunt dolorem perferendis quos labore sequi perspiciatis maxime, facere magni!
+                                </p>
+                            
+                            </div>
+                        </div>
+                        <!-- image part start -->
+                        <div class="col-md-5">
+                            <img src="assets/AOL.png" alt="">
+                        </div>
+                        <!-- End of image part -->
+                    </div>
+                </div>
+                <!-- End of card -->
+
+            </div>
+
+            <div class="container py-3">
+                <!-- Card Start -->
+                <div class="card">
+                    <div class="row ">
+
+                        <!-- image part start -->
+                        <div class="col-md-5">
+                            <img src="assets/Horse.png" alt="">
+                        </div>
+                        <!-- End of image part -->
+
+                        <div class="col-md-7 px-3">
+                            <div class="card-block px-6">
+                                <h4 class="card-title">Bronze Horse Statue</h4>
+                                <p class="card-text">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae laboriosam repudiandae dolore nulla iste unde doloremque quod sed voluptate repellendus nemo fugiat aliquid blanditiis, deserunt architecto excepturi a quis voluptatem quos officiis, hic qui in! Placeat consectetur saepe eius sequi excepturi aperiam? Aspernatur, accusantium hic quis ipsam qui minus at! Voluptas impedit possimus optio facilis accusantium cumque asperiores ipsam soluta deleniti. Distinctio molestias, vero ullam nesciunt dolorem perferendis quos labore sequi perspiciatis maxime, facere magni!
+                                </p>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- End of card -->
+
+            </div>
+
+            <div class="container py-3">
+                <!-- Card Start -->
+                <div class="card">
+                    <div class="row ">
+
+                        <div class="col-md-7 px-3">
+                            <div class="card-block px-6">
+                                <h4 class="card-title">Greek Folding Mirror</h4>
+                                <p class="card-text">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae laboriosam repudiandae dolore nulla iste unde doloremque quod sed voluptate repellendus nemo fugiat aliquid blanditiis, deserunt architecto excepturi a quis voluptatem quos officiis, hic qui in! Placeat consectetur saepe eius sequi excepturi aperiam? Aspernatur, accusantium hic quis ipsam qui minus at! Voluptas impedit possimus optio facilis accusantium cumque asperiores ipsam soluta deleniti. Distinctio molestias, vero ullam nesciunt dolorem perferendis quos labore sequi perspiciatis maxime, facere magni!
+                                </p>
+                                
+                                
+                            </div>
+                        </div>
+                        <!-- image part start -->
+                        <div class="col-md-5">
+                            <img src="assets/coin2.png" alt="">
+                        </div>
+                        <!-- End of image part -->
+                    </div>
+                </div>
+                <!-- End of card -->
+
+            </div>
+
+        </section>
+
+    </section>
 {% endblock %}  

@@ -5,9 +5,9 @@
 <h1>Search</h1>
 
 <div class="searchboxes">
-    <form method="POST">
-    {% csrf_token %}
-    <ul>
+    
+    {% comment %} {% csrf_token %} {% endcomment %}
+    {% comment %} <ul>
         <li><input type="text" name="VASEID" placeholder="Search Vase ID"></li>
         <li><input type="text" name="VASEREF" placeholder="Search Vase Reference"></li>
         <li><input type="text" name="COLLECTION" placeholder="Search Collection"></li>
@@ -18,8 +18,35 @@
         <li><input type="text" name="PLATE" placeholder="Search Plate"></li>
         <li><input type="text" name="DESCRIPTION" placeholder="Search Description"></li>
         <input name="search" class="btn btn-dark my-4" type=submit value="Search" />
+    </ul> {% endcomment %}
+    <ul class="filterlist">
+        <li>
+            <div class="filters">
+                <div class="search-container">
+                    <div class="title_2">
+                        <h3>General Search</h3>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                    </form>
+                </div>
+        </li>
+        <li>
+            <div class="filters">
+                <div class="search-container">
+                    <div class="title_2">
+                        <h3>Vase Reference</h3>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Search Vase Reference" name="VASEREF">
+                        <button type="submit" value="Search"><img src="assets/bx_search-alt-2search.png" alt="search"></button>
+                    </form>
+                </div>
+        </li>
     </ul>
-    </form>
 </div>
 {% for x in output %}
 <p>{{x}}</p>
