@@ -24,6 +24,3 @@ def modify_record(id, vase_values):
     command = command[:-2] + f" WHERE VASEID=\"{id}\""
     cur.execute(command)
     con.commit()
-
-def reset_counter():
-    
