@@ -39,6 +39,7 @@ ALLOWED_HOSTS = [
     'amap-website.herokuapp.com',
     '127.0.0.1',
     'www.trendalldatabase.com',
+    'trendalldatabase.com',
     ]
 
 
