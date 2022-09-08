@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<h1>Search</h1>
+
+<div class="searchboxes">
+    <form method="POST">
+    {% csrf_token %}
+    <ul>
+        <li><input type="text" name="VASEID" placeholder="Search Vase ID"></li>
+        <li><input type="text" name="VASEREF" placeholder="Search Vase Reference"></li>
+        <li><input type="text" name="COLLECTION" placeholder="Search Collection"></li>
+        <li><input type="text" name="HEIGHT" placeholder="Search Height"></li>
+        <li><input type="text" name="DIAMETER" placeholder="Search Diameter"></li>
+        <li><input type="text" name="PUBLICATION" placeholder="Search Publication"></li>
+        <li><input type="text" name="SHAPE" placeholder="Search Shape"></li>
+        <li><input type="text" name="PLATE" placeholder="Search Plate"></li>
+        <li><input type="text" name="DESCRIPTION" placeholder="Search Description"></li>
+        <input name="search" class="btn btn-dark my-4" type=submit value="Search" />
+    </ul>
+    </form>
+</div>
+{% for x in output %}
+<p>{{x}}</p>
+{% endfor%}
+{% endblock %}

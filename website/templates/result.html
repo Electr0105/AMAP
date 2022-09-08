@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load static %}
+
+
+{% block head %}
+
+<h1 class="intro">Results</h1>
+<div class="main">
+    <div class="topnav">
+      <a href="/">Home</a>
+      <a href="../advanced_search">Search Page</a>
+      <a href="../contact">Contact</a>
+      <a href="../about">About</a>
+      <a href="../admin">Login</a>
+      <a href="../upload">Upload</a>
+      <form method=POST action="{% url 'searchResult' %}" >
+        {% csrf_token %}
+        <input autocomplete="off" type="text" placeholder="Search Database" name="searchDatabase">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+<div>
+{{ vaseObject }}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<h1>Database</h1>
+<div class = "dbTable">
+    <h4>All current vases</h4>
+    <ol>
+    {% for vase in all_vases%}
+    <a href="vase/{{vase.VASEID}}">Vase ID: {{vase.VASEID}}, Vase Reference: {{vase.VASEREF}}, Collection Name: {{vase.COLLECTION}}</a>
+    <br>
+    <br>
+    {% endfor %}
+    </ol>
+    </div>
+{% endblock %}

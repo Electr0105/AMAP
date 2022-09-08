@@ -1,19 +1,7 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
-
-<a href="/search">
-  <img class="img" src="https://amap-images.s3.ap-southeast-2.amazonaws.com/testImage.png" width="200px" height="200px">
-</a>
-<div class="data">
-  {% for item in all %}
-    <strong>{{ item }}  </strong>
-      <br>
-  {% endfor %}
-</div>
-  <form method="get" action="/search">
-      <button type="submit">Search</button>
-  </form>
-</div>
-{% endblock %}
+{% block body %}
+<h1>The Trendall Database</h1>
+<img id=mainPot src="{% static 'assets/basicPot.png' %}" alt="pot">
+{% endblock %}  

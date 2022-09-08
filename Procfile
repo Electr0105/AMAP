@@ -1,1 +1,2 @@
-web: gunicorn dbdisplay.wsgi
+web: gunicorn AMAPWebsite.wsgi
+python manage.py collectstatic --noinput;
