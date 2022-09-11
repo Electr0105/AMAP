@@ -161,3 +161,6 @@ def vase_page(request, id=None):
                 return render(request, 'missing_vase.html', {})
     else:
         return render(request, 'database.html', {})
+
+def jstest(request, id=None):
+    return render(request, 'jstest.html', {})
