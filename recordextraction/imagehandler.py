@@ -1,8 +1,6 @@
 """
 Author: Michael Horina
-This is the module that handles image functions: methods for preprocessing
-images to increase accuracy of tesseract. Performing dilation/erosion and 
-median blur to reduce noise helps greatly. 
+Currently only upscales images using the preprocess function.
 """
 
 import cv2

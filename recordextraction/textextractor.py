@@ -24,7 +24,7 @@ def getocrdata(image : list) -> dict:
     """
 
     image = preprocess(image)
-    data = pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="eng+ell", output_type=Output.DICT)      
+    data = pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="trendall", output_type=Output.DICT)      
     return data
 
 def generateimages(page : str, data : str, overwrite : bool = False) -> int:

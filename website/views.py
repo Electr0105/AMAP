@@ -11,6 +11,7 @@ from .models import Vase
 from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
 from django.http import Http404
+from django.http import JsonResponse
 from sql_scripts import insert_to_DB, modify_record
 
 
@@ -161,6 +162,3 @@ def vase_page(request, id=None):
                 return render(request, 'missing_vase.html', {})
     else:
         return render(request, 'database.html', {})
-
-def jstest(request, id=None):
-    return render(request, 'jstest.html', {})

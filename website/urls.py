@@ -13,6 +13,5 @@ urlpatterns = [
     path('upload/confirm', views.upload_confirm, name="upload_confirm"),
     path('vase/<int:id>', views.vase_page, name="vase_page"),
     path('upload/file', views.upload_file, name="upload_file"),
-    path('upload/text', views.upload_text, name="upload_text"),
-    path('jstest', views.jstest, name="jstest")
+    path('upload/text', views.upload_text, name="upload_text")
 ]

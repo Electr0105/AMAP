@@ -4,7 +4,6 @@ import os
 from imagehandler import preprocess
 from textprocessing import *
 import sqlite3
-import cv2
 
 sql3 = '/home/mike/AMAP/db.sqlite3'
 
@@ -50,11 +49,5 @@ def processpdf(pdf : str, db : sqlite3.Connection):
         generateimages(os.path.join(filefolder, page), pagedata)
 
 
-# processpdf(pdf, dbconnect(sql3))
-# linenumber = 0
-# image = "/mnt/e/2022 Industry Project/Resources/RVPfixed/page"
-
-# image = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
-# bordered = cv2.copyMakeBorder(image, 4, 4, 4, 4, cv2.BORDER_CONSTANT, None, 255)
-# bordered = cv2.copyMakeBorder(bordered, 2, 2, 2, 2, cv2.BORDER_CONSTANT, None, 0)
-# cv2.imwrite("/mnt/e/2022 Industry Project/Resources/data/")
+file = "/mnt/e/2022 Industry Project/Resources/RVPfixed/page56.png"
+print(getocrdata(cv2.imread(file)))
