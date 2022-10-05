@@ -28,13 +28,25 @@ nav {
 }
 
 .nav-links a {
-  color: #000;
+  color: rgb(137, 137, 137);
   text-decoration: none;
   letter-spacing: 1.5px;
   font-family: 'Maitree';
   font-size: 21px;
   font-weight: 500;
 }
+
+.nav-links .active_link
+{
+  color:#000;
+}
+
+.nav-links a:hover
+{
+  color:#000;
+}
+
+
 
 .burger {
   display: none;
@@ -167,8 +179,33 @@ nav {
   /* padding-right: 2%; */
 }
 
-.column h3 {
+
+.column2
+{
+  margin-top: 10px;
+}
+
+.column2 h3 {
   font-family: 'Maitree', sans-serif;
+  cursor: pointer;
+  color: rgb(137, 137, 137);
+  font-weight: 600;
+}
+
+.column2 h3 a
+{
+  text-decoration: none;
+  color: rgb(137, 137, 137);
+}
+
+.column2 h3 a:hover
+{
+  color:#000;
+}
+
+.column2 h3 .active_footer
+{
+  color: #000;
 }
 
 .column p {
