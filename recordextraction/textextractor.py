@@ -11,20 +11,27 @@ from pytesseract import Output
 from imagehandler import preprocess
 from pdfhandler import *
 
-def getocrdata(image : list) -> dict:
+def getocrdata(image : list, output_type : str = 'd') -> dict:
     """
     Runs tesseract on the specified image
 
     Parameters
-    image: str
+    image : str
         the specified image to open and run OCR on
+    output_type : str
+        whether the output is a line by line string ('s') or default case - a dict of arrays ('d')
     Returns
-    data: dict
+    data : dict
         a string containing all the text found by tesseract
     """
-
+    if output_type.lower() == 's':
+        output = Output.STRING
+    elif output_type.lower() == 'd':
+        output = Output.DICT
+    else:
+        return "Error: unknown output entered"
     image = preprocess(image)
-    data = pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="trendall", output_type=Output.DICT)      
+    data = pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="trendall", output_type=output)      
     return data
 
 def generateimages(page : str, data : str, overwrite : bool = False) -> int:

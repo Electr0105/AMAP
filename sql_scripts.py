@@ -24,3 +24,8 @@ def modify_record(id, vase_values):
     command = command[:-2] + f" WHERE VASEID=\"{id}\""
     cur.execute(command)
     con.commit()
+
+def delete_record(id):
+    command = "DELETE FROM website_vase WHERE vaseid = " + str(id)
+    cur.execute(command)
+    con.commit()

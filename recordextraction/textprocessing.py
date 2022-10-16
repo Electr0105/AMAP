@@ -53,12 +53,12 @@ def getfontsize(line : list, bestfit : bool = False) -> int:
         blob = numpy.array(blob, dtype=numpy.int32)
         newbox = cv2.minAreaRect(blob)
         if newbox[2] > 45:
-            pix = newbox[1][0]/2
+            pix = newbox[1][0]
         else:
-            pix = newbox[1][1]/2 #divided by 2 because the preprocessing upscales images 2x.
+            pix = newbox[1][1]
         return pix
     else:
-        pix = len(line)/2 #divided by 2 because the preprocessing upscales images 2x.
+        pix = len(line)
     return pix
 
 def characterizelines(lines : list) -> str:

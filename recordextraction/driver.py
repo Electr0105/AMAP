@@ -49,5 +49,10 @@ def processpdf(pdf : str, db : sqlite3.Connection):
         generateimages(os.path.join(filefolder, page), pagedata)
 
 
-file = "/mnt/e/2022 Industry Project/Resources/RVPfixed/page56.png"
-print(getocrdata(cv2.imread(file)))
+base = "/mnt/e/2022 Industry Project/Resources/RVPfixed/page"
+test = "/mnt/e/2022 Industry Project/Resources/page"
+for i in range(55, 394):
+    file = base + str(i) + ".png"
+    fout = open(test + str(i) + "string.txt", 'w')
+    fout.write(getocrdata(cv2.imread(file)))
+    fout.close()

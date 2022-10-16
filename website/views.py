@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
@@ -12,7 +13,7 @@ from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
 from django.http import Http404
 from django.http import JsonResponse
-from sql_scripts import insert_to_DB, modify_record
+from sql_scripts import insert_to_DB, modify_record, delete_record
 
 
 # Create your views here.
@@ -42,6 +43,7 @@ def login_user(request):
         else:
             return render(request, 'login.html', {})
 
+@login_required
 def upload(request):
     """Renders the upload page"""
     return render(request, 'upload.html', {})
@@ -54,6 +56,7 @@ def about(request):
     """Renders the about page"""
     return render(request, 'about.html', {})
 
+@login_required
 def upload_file(request):
     """Renders the upload_file page"""
     if request.method == 'POST' and request.FILES['myfile']:
@@ -75,6 +78,7 @@ def upload_file(request):
     else:
         return render(request, 'upload_file.html', {})
 
+@login_required
 def upload_text(request):
     """Renders the upload_file page"""
     if request.method == "GET":
@@ -114,6 +118,7 @@ def upload_edits(request):
     """Renders the upload_file page"""
     return render(request, 'upload_edits.html', {})
 
+@login_required
 def database(request):
     """Renders the database page"""
     objects = Vase.objects.all()
@@ -152,6 +157,9 @@ def vase_page(request, id=None):
                 if value.isupper():
                     vase_values.update({value:request.POST.get(value)})
             modify_record(id, vase_values)
+            return redirect(database)
+        elif 'delete' in request.POST:
+            delete_record(id)
             return redirect(database)
         else:
             try:
