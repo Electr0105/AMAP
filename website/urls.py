@@ -14,5 +14,6 @@ urlpatterns = [
     path('vase/<int:id>', views.vase_page, name="vase_page"),
     path('upload/file', views.upload_file, name="upload_file"),
     path('upload/text', views.upload_text, name="upload_text"),
+    path('spacy', views.spacy_page, name="spacy_page"),
 
 ]

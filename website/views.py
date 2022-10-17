@@ -1,10 +1,13 @@
+from re import L
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+import os
 # from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from Spacy.loadSpacy import spacy_run, filler
 from TextExtraction.text_ex import text_extractor
+from TextExtraction.extraction import ref_extractor
 from search_scripts import search_func
 from search_scripts import general_search
 from .models import Vase
@@ -12,7 +15,9 @@ from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
 from django.http import Http404
 from sql_scripts import insert_to_DB, modify_record
-
+from .forms import UploadFileForm
+from django.core.files.storage import default_storage
+from zipfile import ZipFile
 
 # Create your views here.
 def home(request):
@@ -56,21 +61,9 @@ def about(request):
 def upload_file(request):
     """Renders the upload_file page"""
     if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        # text = text_extractor(myfile)
-        # print(text)
-        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url})
-        text = text_extractor(myfile)
-        print(text)
-        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url, "text":text})
-
-        text = text_extractor(myfile)
-        print(text)
-        return render(request, 'upload_file.html', {"uploaded_file_url":uploaded_file_url, "text":text})
-
+        my_file = request.FILES['myfile']
+        ref_extractor(my_file)
+        return redirect(database)
     else:
         return render(request, 'upload_file.html', {})
 
@@ -101,7 +94,6 @@ def upload_text(request):
 
 def upload_confirm(request):
     """Renders the upload_file page"""
-    print("ASDDSDSDADADASD")
     if request.method == "POST":
         if 'confirm' in request.POST:
             print("CONFIRM")
@@ -161,3 +153,10 @@ def vase_page(request, id=None):
                 return render(request, 'missing_vase.html', {})
     else:
         return render(request, 'database.html', {})
+
+def spacy_page(request):
+    """Renders spacy page"""
+    if request.method == "POST":
+        print(file.read())
+        return render(request, 'spacy.html', {})
+    return render(request, 'spacy.html', {})
