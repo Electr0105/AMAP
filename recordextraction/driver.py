@@ -1,4 +1,4 @@
-from pdfhandler import *
+from pdfhandler import extractpages
 from textextractor import *
 import os
 from imagehandler import preprocess
@@ -16,7 +16,7 @@ def dbconnect(db : str) -> sqlite3.Connection:
 # def initialize(db : sqlite3.connection):
 #     sql
 
-def processpdf(pdf : str, db : sqlite3.Connection):
+# def processpdf(pdf : str, db : sqlite3.Connection):
     """
     This function applies all the processing to a pdf in the necessary order
 
@@ -26,13 +26,14 @@ def processpdf(pdf : str, db : sqlite3.Connection):
 
     Returns
     """
-
+    cur = db.cursor()
     folder = os.path.dirname(pdf)
     filename = os.path.basename(pdf)
     filefolder = os.path.join(folder, os.path.splitext(filename)[0])
     lines = os.path.join(filefolder, "lines")
     if not os.path.exists(lines):
         os.makedirs(lines, exist_ok=True)
+
 
     extractpages(pdf)
 
@@ -43,16 +44,14 @@ def processpdf(pdf : str, db : sqlite3.Connection):
         pagedata = getocrdata(pagefile)
         for i in range(len(pagedata['page_num'])):
             pagedata['page_num'][i] = pageno
-            # if pagedata['level'][i] == 
-        # sqlstatement = "INSERT INTO Page "
+            if pagedata['level'][i] == 4:
+                sqlstatement = "INSERT INTO Line("
         # db.execute(sqlstatement)
         generateimages(os.path.join(filefolder, page), pagedata)
 
 
-base = "/mnt/e/2022 Industry Project/Resources/RVPfixed/page"
-test = "/mnt/e/2022 Industry Project/Resources/page"
-for i in range(55, 394):
-    file = base + str(i) + ".png"
-    fout = open(test + str(i) + "string.txt", 'w')
-    fout.write(getocrdata(cv2.imread(file)))
-    fout.close()
+tessdata = getocrdata(cv2.imread("/mnt/e/2022 Industry Project/Resources/RVPfixed/page56.png", cv2.IMREAD_COLOR), output_type='s')
+
+file = "/mnt/e/2022 Industry Project/Resources/page56.txt"
+fout = open(file, 'w')
+fout.write(tessdata)

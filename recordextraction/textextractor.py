@@ -16,8 +16,8 @@ def getocrdata(image : list, output_type : str = 'd') -> dict:
     Runs tesseract on the specified image
 
     Parameters
-    image : str
-        the specified image to open and run OCR on
+    image : list
+        the specified image as an array
     output_type : str
         whether the output is a line by line string ('s') or default case - a dict of arrays ('d')
     Returns
