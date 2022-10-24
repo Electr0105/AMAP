@@ -1,0 +1,14 @@
+Welcome to CS Squared's final project for PRA/B.
+This is the ultimate culmination of 2 semesters of work to produce a real solution to a real problem.
+Currently, the system involves prototypes for a Tesseract OCR model,
+trained to extract text accurately from a PDF,
+paired with a Spacy model to take the informated extracted from Tesseract and
+extracting valuable vase references.
+
+All Tesseract systems were handled by Michael Horina,
+Spacy and the Django model were developed by Jackson Gleeson,
+And the front handled and designed by Rajan Vishal Pusalkar
+
+Installation instructions are avaliable in ‘installation.txt’.
+
+If you have issues with the code and it’s desperate, contact Jackson Gleeson.

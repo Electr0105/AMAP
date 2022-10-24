@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 import spacy
 
 def spacy_run(value):

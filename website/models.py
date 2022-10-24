@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 from django.db import models
 from django.forms.models import model_to_dict
 
@@ -16,7 +19,7 @@ class Vase(models.Model):
     FABRIC = models.CharField(max_length=50, blank=True,null=True)
     TECHNIQUE = models.CharField(max_length=50,blank=True,null=True)
     SHAPE = models.CharField(max_length=50,blank=True,null=True)
-    
+
     def __str__(self):
         output = "VASEID: " + str(self.VASEID) + " VASEREF: " + str(self.VASEREF) + " COLLECTION NAME: " + self.COLLECTION
         return output
@@ -47,7 +50,7 @@ class Archive(models.Model):
         for field in Archive._meta.get_fields():
             fields.append(str(field).replace("website.Archive.", ""))
         return fields
-    
+
     def all_values(self):
         output = model_to_dict(self)
         return output

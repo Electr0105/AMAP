@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 from django.urls import path
 from . import views
 
@@ -17,4 +20,4 @@ urlpatterns = [
     path('spacy', views.spacy_page, name="spacy_page"),
     path('upload/pdf', views.upload_pdf, name="upload_pdf"),
     path('files', views.files, name="files")
-] 
+]

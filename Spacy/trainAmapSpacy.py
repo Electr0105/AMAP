@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 import random
 from pathlib import Path
 from spacy.util import minibatch, compounding
@@ -40,7 +43,7 @@ def trainAndRun():
   with nlp.disable_pipes(*other_pipes) :
 
     sizes = compounding(1.0, 4.0, 1.001)
-    # Training for 50000 iterations     
+    # Training for 50000 iterations
     for itn in range(3000):
       # shuffle examples before training
       random.shuffle(TRAIN_DATA)

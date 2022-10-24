@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 from re import search
 from website.models import Vase
 from django.db.models import CharField

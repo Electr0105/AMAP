@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 import random
 from pathlib import Path
 from spacy.util import minibatch, compounding

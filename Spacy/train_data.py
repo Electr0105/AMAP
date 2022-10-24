@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 TRAIN_DATA_01 =[ ("191 Madrid 11456 (L. 442). Ht. 22", {"entities": [(0, 3, "VASEREF"),(27,33, "HEIGHT"),(4,25,"COLLECTION")]}),
               ("192 Paestum 31998, from C. Spina (1963), T. 4. Ht. 23", {"entities": [(0, 3, "VASEREF"),(47,53, "HEIGHT"),(4,39,"COLLECTION")]}),
               ("195 Paestum, from C. Spina-Gaudo (1979), T. 73. Ht. 22-5.", {"entities": [(0, 3, "VASEREF"),(48,56, "HEIGHT"),(4,39,"COLLECTION")]}),

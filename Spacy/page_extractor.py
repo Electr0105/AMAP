@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 import pdfplumber
 
 write_file = open('write_RVP.py','a')

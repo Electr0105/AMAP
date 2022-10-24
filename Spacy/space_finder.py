@@ -1,10 +1,13 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 open_file = open('formated_data.txt','a')
 
 def space_finder(input=None, VASEREF=None,COLLECTION=None,HEIGHT=None,DIAMETER=None,PUBLICATION=None,PLATE=None,DESCRIPTION=None):
     labels = {"VASEREF","COLLECTION","HEIGHT","DIAMETER","PUBLICATION","PLATE","DESCRIPTION"}
     words = {"VASEREF":VASEREF,"COLLECTION":COLLECTION,"HEIGHT":HEIGHT,"DIAMETER":DIAMETER,"PUBLICATION":PUBLICATION,"PLATE":PLATE,"DESCRIPTION":DESCRIPTION}
     output = "(\"\"\"{}\"\"\",{{\"entities\":[".format(input)
-    for key, value in words.items():   
+    for key, value in words.items():
         if value is not None:
             start = input.find(str(value))
             end = start + len((str(value)))

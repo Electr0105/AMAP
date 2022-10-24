@@ -1,3 +1,6 @@
+# Written by Jackson Gleeson
+# For PRA/B in 2022
+
 from re import L
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -82,7 +85,7 @@ def upload_pdf(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("/files")
-    
+
     else:
         form = ArchiveForm()
         return render(request, "upload_pdf.html", {"form": form})
