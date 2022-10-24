@@ -8,8 +8,8 @@ import os
 import cv2
 import pytesseract
 from pytesseract import Output
-from imagehandler import preprocess
-from pdfhandler import *
+from recordextraction.imagehandler import preprocess
+from recordextraction.pdfhandler import *
 
 def getocrdata(image : list, output_type : str = 'd') -> dict:
     """
@@ -31,7 +31,7 @@ def getocrdata(image : list, output_type : str = 'd') -> dict:
     else:
         return "Error: unknown output entered"
     image = preprocess(image)
-    data = pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="trendall", output_type=output)      
+    data = pytesseract.image_to_data(image, config='--psm 1 --oem 1', lang="eng", output_type=output)      
     return data
 
 def generateimages(page : str, data : str, overwrite : bool = False) -> int:

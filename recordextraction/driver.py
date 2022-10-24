@@ -1,20 +1,25 @@
-from pdfhandler import extractpages
-from textextractor import *
+"""
+The main driver of the OCR process
+Input parameters should be a single PDF file, start page and end page.
+TODO: Create function to open PDF and split pages at user specified locations and:
+- apply OCR to each page file, outputting data as a .txt file
+- apply record identification and split + DB loading for each .txt file
+- mark archive status as complete in DB
+"""
+
+from recordextraction.pdfhandler import extractpages
+from recordextraction.textextractor import *
 import os
-from imagehandler import preprocess
-from textprocessing import *
+from recordextraction.imagehandler import preprocess
+from recordextraction.textprocessing import *
 import sqlite3
 
 sql3 = '/home/mike/AMAP/db.sqlite3'
 
-pdf = "/mnt/e/2022 Industry Project/Resources/RVPfixed.pdf"
 
 def dbconnect(db : str) -> sqlite3.Connection:
     conn = sqlite3.connect(db)
     return conn
-
-# def initialize(db : sqlite3.connection):
-#     sql
 
 # def processpdf(pdf : str, db : sqlite3.Connection):
     """
@@ -49,9 +54,3 @@ def dbconnect(db : str) -> sqlite3.Connection:
         # db.execute(sqlstatement)
         generateimages(os.path.join(filefolder, page), pagedata)
 
-
-tessdata = getocrdata(cv2.imread("/mnt/e/2022 Industry Project/Resources/RVPfixed/page56.png", cv2.IMREAD_COLOR), output_type='s')
-
-file = "/mnt/e/2022 Industry Project/Resources/page56.txt"
-fout = open(file, 'w')
-fout.write(tessdata)

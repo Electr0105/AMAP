@@ -210,7 +210,8 @@ def extractpages(pdf: str, saveto: str = None, overwrite : bool = False):
     page_count = doc.page_count
     print("Number of pages: " + str(page_count))
 
-    for pageno in range(page_count):
+    #TODO: implement user set start/end page extraction while maintaining page numbering
+    for pageno in range(page_count): 
         if overwrite == False:
             if os.path.exists(os.path.join(saveto, "page" + str(pageno) + ".png")):
                 continue

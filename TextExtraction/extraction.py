@@ -1,3 +1,10 @@
+"""
+Author: Jackson Gleeson
+Extraction function that takes a .zip file of .txt files containing Tesseract OCR data and locates records based on
+their location within the document, and whether the line begins with an integer or an integer preceded by an asterisk.
+TODO: More generalized location and font sorting, capturing publication and descriptions, verification based on incremental digits within an archive.
+"""
+
 from Spacy.loadSpacy import spacy_run, filler
 from zipfile import ZipFile
 from sql_scripts import insert_to_DB

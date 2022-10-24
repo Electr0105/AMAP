@@ -9,12 +9,14 @@ from django.core.files.storage import FileSystemStorage
 from Spacy.loadSpacy import spacy_run, filler
 from TextExtraction.text_ex import text_extractor
 from TextExtraction.extraction import ref_extractor
+import recordextraction
 from search_scripts import search_func
 from search_scripts import general_search
-from .models import Vase
+from .models import Vase, Archive
 from django.core.files.uploadedfile import UploadedFile
 from .forms import UploadFileForm
-from django.http import Http404
+from .forms import ArchiveForm
+from django.http import Http404, HttpResponseRedirect
 from django.http import JsonResponse
 from sql_scripts import insert_to_DB, modify_record, delete_record
 from .forms import UploadFileForm
@@ -70,6 +72,29 @@ def upload_file(request):
         return redirect(database)
     else:
         return render(request, 'upload_file.html', {})
+
+@login_required
+def upload_pdf(request):
+    """Renders the upload_pdf page"""
+    if request.method == 'POST':
+        form = ArchiveForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/files")
+    
+    else:
+        form = ArchiveForm()
+        return render(request, "upload_pdf.html", {"form": form})
+
+@login_required
+def files(request):
+    """Renders the files page"""
+    objects = Archive.objects.all()
+    archives = []
+    for archive in objects:
+        archives.append(archive.all_values_culled())
+    return render(request, 'files.html', {"archives": archives})
 
 @login_required
 def upload_text(request):

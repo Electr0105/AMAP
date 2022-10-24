@@ -15,5 +15,6 @@ urlpatterns = [
     path('upload/file', views.upload_file, name="upload_file"),
     path('upload/text', views.upload_text, name="upload_text"),
     path('spacy', views.spacy_page, name="spacy_page"),
-
-]
+    path('upload/pdf', views.upload_pdf, name="upload_pdf"),
+    path('files', views.files, name="files")
+] 

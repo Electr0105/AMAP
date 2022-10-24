@@ -7,7 +7,7 @@ TODO: getfontsize
 
 """
 
-from imagehandler import preprocess
+from recordextraction.imagehandler import preprocess
 import cv2
 import numpy
 

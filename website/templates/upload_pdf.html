@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form id="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {% for entry in form %}
+          <div>
+          {{ entry.label_tag }}
+          </div>
+          <div>
+            {{entry}}
+          </div>
+        {% endfor %}
+        <br>
+        <button class="btn btn-dark my-4" type="submit">Upload</button>
+</form>
+<!-- <form method="post">
+  {% csrf_token %}
+  <button name="refresh">REFRESH</button>
+</form> -->
+
+{% if text %}
+{% for x in text%}
+<p>{{x}}</p>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

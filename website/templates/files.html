@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Extract Records?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for archive in archives %}
+            <tr>
+                <td>
+                    {{archive.name}}
+                </td>
+                <td>
+                    {% if archive.processed %}&#10004; Processed{% endif %}{% if archive.processed != None %}&#10060; Unprocessed{% endif %}{% if archive.processed == None %}&#9888; In progress{% endif %}
+                </td>
+                <td>
+                    {% if archive.processed != None %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input name=process class="btn btn-primary" data-id="{{archive.id}}" type=submit value="Process Archive" />
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

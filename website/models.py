@@ -35,3 +35,24 @@ class Vase(models.Model):
         output = model_to_dict(self)
         culled_dict = {key:val for key, val in output.items() if val is not None}
         return culled_dict
+
+class Archive(models.Model):
+    archiveid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, null=False, blank=False)
+    media = models.FileField(upload_to="", null=True, blank=True)
+    processed = models.BooleanField(default=False)
+
+    def all_fields(self):
+        fields = []
+        for field in Archive._meta.get_fields():
+            fields.append(str(field).replace("website.Archive.", ""))
+        return fields
+    
+    def all_values(self):
+        output = model_to_dict(self)
+        return output
+
+    def all_values_culled(self):
+        output = model_to_dict(self)
+        culled_dict = {key:val for key, val in output.items() if val is not None}
+        return culled_dict
