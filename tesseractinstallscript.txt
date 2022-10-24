@@ -1,0 +1,20 @@
+sudo apt-get install automake ca-certificates g++ git libtool libleptonica-dev make pkg-config
+sudo apt-get install --no-install-recommends asciidoc docbook-xsl xsltproc
+sudo apt-get install libpango1.0-dev libicu-dev libcairo2-dev
+wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.2.0.tar.gz 
+tar -xf 5.2.0.tar.gz
+cd tesseract
+./autogen.sh
+autoreconf -i
+./configure
+make
+sudo make install
+sudo ldconfig
+make training
+sudo make training-install
+
+sudo wget https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata -O /usr/local/share/tessdata/eng.traineddata
+sudo wget https://github.com/tesseract-ocr/tessdata_best/raw/main/ell.traineddata -O /usr/local/share/tessdata/ell.traineddata
+
+sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
+
